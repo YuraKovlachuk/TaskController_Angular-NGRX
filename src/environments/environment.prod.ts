@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API: 'http://127.0.0.1:8080/api',
-  URL: 'http://127.0.0.1:8080/'
+  API: 'https://enigmatic-shelf-18044.herokuapp.com/api',
+  URL: 'https://enigmatic-shelf-18044.herokuapp.com/'
 };
