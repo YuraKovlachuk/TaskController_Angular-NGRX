@@ -33,7 +33,6 @@ export class TaskComponent implements OnInit {
   dragStart(e: any) {
     this.store.dispatch(setTaskID({taskId: this.task._id}))
     e.target.classList.add('invisible')
-    e.dataTransfer.setDragImage(e.target, 200, 100);
   }
 
   dragEnd(e: any) {
