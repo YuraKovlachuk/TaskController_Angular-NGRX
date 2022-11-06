@@ -1,0 +1,24 @@
+<header class="header">
+  <nav class="header__nav">
+    <a class="header__logo" [routerLink]="['/dashboard']">
+      <img src="assets/image/logo.png" class="header__logo-img" alt="Flowbite Logo"/>
+      <span class="header__logo-text"><span class="text-purple">C</span>Task</span>
+    </a>
+    <div class="header__auth" *ngIf="!user">
+      <span><a [routerLink]="['/login']" class="header__auth-link">Sign in</a></span>
+      <div class="header__auth-box">
+        <a [routerLink]="['/register']">Sign up</a>
+      </div>
+    </div>
+    <ng-container *ngIf="user">
+      <ul class="header__pages">
+        <li><a [routerLink]="['/dashboard']" [routerLinkActive]="'active-head-link'" class="header__pages-link">Boards</a></li>
+        <li><a [routerLink]="['/about']" [routerLinkActive]="'active-head-link'" class="header__pages-link">About</a></li>
+      </ul>
+      <div class="header__profile">
+        <img [routerLink]="['/about']" class="header__profile-photo" [src]="api + user.avatar" alt="avatar">
+        <header-dropdown [title]="user.username"></header-dropdown>
+      </div>
+    </ng-container>
+  </nav>
+</header>

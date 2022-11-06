@@ -1,0 +1,90 @@
+@import "src/assets/styles/variable";
+
+.board {
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: $board-width;
+  height: $board-height;
+  border-radius: 10px;
+  color: $text-color;
+  transition: .2s;
+  background-color: #0ACE82;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-title {
+      margin: 0;
+      overflow:hidden;
+      display:inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-removeB {
+      outline: none;
+      box-sizing: border-box;
+      background-color: $text-color;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      transition: .2s;
+    }
+
+    &-removeB::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: rotate(45deg);
+      width: 18px;
+      margin-left: -9px;
+      margin-top: -1px;
+      border-top: 3px solid var(--my-color-var);
+    }
+
+    &-removeB::after {
+      content: "";
+      position: absolute;
+      transform: rotate(45deg);
+      left: 50%;
+      top: 50%;
+      height: 18px;
+      margin-left: -1px;
+      margin-top: -9px;
+      border-left: 3px solid var(--my-color-var);
+    }
+
+    &-removeB:hover, &-removeB:focus {
+      background-color: #e71313;
+      cursor: pointer;
+    }
+
+  }
+
+  &__desc {
+    margin: 5px 0 0 0;
+    display:inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: break-word;
+  }
+
+  &__date {
+    align-self: flex-end;
+    margin: auto 0 0 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+}
+
+.board:hover, .board:focus {
+  cursor: pointer;
+  transform: scale(1.07);
+}

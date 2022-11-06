@@ -1,0 +1,58 @@
+@import "src/assets/styles/variable";
+
+.menu-container {
+  color: $text-color;
+  position: relative;
+}
+
+.menu-toggler {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  outline: 0;
+  font-size: 22px;
+  transition: .2s;
+}
+
+.menu-toggler:hover {
+  color: white;
+}
+
+.menu-toggler:focus {
+  color: white;
+}
+
+.fixed {
+  position: absolute;
+  top: 0;
+  left: 15px;
+}
+
+.menu-container:hover .menu {
+  display: block;
+}
+
+.menu {
+  background: $text-color;
+  color: $dark-color;
+  position: fixed;
+  width: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+  border-radius: 5px;
+  display: none;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 3px 13px;
+  transition: .2s;
+  font-size: 12px;
+  outline: none;
+  border-radius: 5px;
+}
+
+.menu-item:hover, .menu-item:focus {
+  background: $main-purple-color;
+  color: $text-color;
+}

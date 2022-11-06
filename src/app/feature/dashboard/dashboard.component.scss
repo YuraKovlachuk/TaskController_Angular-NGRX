@@ -1,0 +1,9 @@
+@import "src/assets/styles/variable";
+
+.board-list {
+  margin: 53px 0 0 0;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  gap: calc(($container-width - $board-width * 4) / 3);
+}

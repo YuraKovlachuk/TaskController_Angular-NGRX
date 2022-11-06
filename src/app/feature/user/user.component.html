@@ -1,0 +1,11 @@
+<div class="user-container">
+  <app-btn class="reject" title="Delete account" (click)="deleteUser()"></app-btn>
+  <app-user-info [user]="(user$ | async)!"></app-user-info>
+  <app-change-username [user]="(user$ | async)!"></app-change-username>
+  <app-change-password></app-change-password>
+</div>
+<app-change-avatar-modal
+  [user]="(user$ | async)!"
+  *ngIf="modalService.isShown(modalService.editModalKey)">
+</app-change-avatar-modal>
+<p class="createdBy">Created by Yurii Kovalchuk</p>

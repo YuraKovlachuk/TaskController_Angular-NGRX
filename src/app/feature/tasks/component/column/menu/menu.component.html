@@ -1,0 +1,11 @@
+<div class="menu-container">
+  <div tabindex="0" class="menu-toggler">&#10247;</div>
+  <div class="fixed">
+    <div class="menu">
+      <div tabindex="0" class="menu-item" (click)="edit.emit()">Edit</div>
+      <div tabindex="0" class="menu-item" (click)="delete.emit()">Delete</div>
+      <div tabindex="0" class="menu-item" *ngIf="!isArchived" (click)="archive.emit()">Archive</div>
+      <div tabindex="0" class="menu-item" *ngIf="isArchived" (click)="archive.emit()">Unarchive</div>
+    </div>
+  </div>
+</div>

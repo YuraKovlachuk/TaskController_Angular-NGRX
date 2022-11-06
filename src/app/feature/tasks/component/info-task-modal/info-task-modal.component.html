@@ -1,0 +1,63 @@
+<div class="background"></div>
+<div class="blur" (click)="modalService.hide(modalService.infoModalKey)"></div>
+<div class="modal">
+  <div class="modal__img-box" *ngIf="task.image">
+    <img class="modal__img" [src]="api + task.image" alt="task-image">
+    <div class="modal__img-hover">
+      <label class="material-icons" for="image">&#xe251;</label>
+      <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg, image/gif"
+             (change)="uploadImage($event)">
+      <div class="modal__img-delete" (click)="deleteTaskImg()">&#10005;</div>
+    </div>
+  </div>
+  <div class="modal__title-box">
+    <input class="modal__title-input" type="text" *ngIf="isEditing" [value]="task.name"
+           (focusout)="changeName(name.value)"
+           (onInit)="name.focus()"
+           (keydown)="$event.key === 'Enter' ? changeName(name.value) : ''" ngInit #name/>
+    <h2 class="modal__title" *ngIf="!isEditing" (click)="clickOnTitle()">{{task.name}}
+      <span *ngIf="task.isArchived">(Archived)</span></h2>
+    <div class="modal__title-box-items">
+      <div (click)="archiveTask()" *ngIf="!task.isArchived" class="modal__title-box-archive material-icons" title="Archive task">&#xe149;</div>
+      <div (click)="archiveTask()" *ngIf="task.isArchived" class="modal__title-box-archive material-icons" title="Unarchive task">&#xe169;</div>
+      <div class="modal__title-box-edit" title="Edit task" (click)="toggleEdit()">&#9998;</div>
+      <div class="modal__title-box-delete material-icons" title="Delete task" (click)="deleteTask()">delete</div>
+    </div>
+  </div>
+  <div class="modal__info">
+    <div class="modal__info-item">
+      <p class="modal__info-item-name">Status:</p>
+      <p class="modal__info-item-value">{{task.status}}</p>
+    </div>
+    <div class="modal__info-item">
+      <p class="modal__info-item-name">Created:</p>
+      <p class="modal__info-item-value">{{task.createdAt | date: 'medium'}}</p>
+    </div>
+  </div>
+  <div class="modal__description">
+    <h3 class="modal__description-title">Description</h3>
+    <p class="modal__description-text" *ngIf="task.description">{{task.description}}</p>
+  </div>
+  <div class="modal__activity">
+    <h3 class="modal__activity-title">Activity</h3>
+    <div class="modal__activity-add">
+      <img [src]="api + (user$ | async)!.avatar" alt="user-avatar" class="modal__activity-add-user">
+      <form [formGroup]="form" (ngSubmit)="addComment()">
+        <app-form-input
+          [name]="'comment'"
+          [type]="'text'"
+          [placeholder]="'Enter comment...'"
+          [controlName]="'comment'"
+          [control]="comment"
+          newHeight="45px"
+        ></app-form-input>
+      </form>
+    </div>
+    <div class="modal__activity-comments">
+      <app-task-comment *ngFor="let comment of task.comments" [comment]="comment"
+                        [user]="(user$ | async)!"
+                        (delete)="deleteComment($event)"
+                        (edit)="editComment($event)"></app-task-comment>
+    </div>
+  </div>
+</div>

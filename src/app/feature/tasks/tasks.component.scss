@@ -1,0 +1,28 @@
+@import "src/assets/styles/variable";
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin: 0 0 0 0;
+}
+
+.archived {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+
+  &-list {
+    font-size: 32px;
+    color: $text-color;
+  }
+
+  &-list:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+app-column {
+  width: 28%;
+}

@@ -1,0 +1,33 @@
+<div class="filter-bar">
+  <h2 class="filter-bar__title">{{title}}</h2>
+  <div class="filter-bar__filters">
+    <form class="filter-bar__form">
+      <input type="text" name="search" [placeholder]="filter.value ? 'Search...' : 'Choose filter'" #filterInput>
+      <select name="filter" #filter (change)="filterService.filterName.next(filter.value)">
+        <option value="" selected disabled>Filter</option>
+        <option *ngFor="let filter of filters" [value]="filter.value">{{filter.name}}</option>
+<!--        <option value="name">Board name</option>-->
+<!--        <option value="tasks.name">Task name</option>-->
+      </select>
+      <select name="sort" #sort (change)="filterService.sortBy.next(sort.value)" >
+        <option value="" selected disabled>Sort by</option>
+        <optgroup *ngFor="let group of sorts" [label]="group.label">
+          <option *ngFor="let option of group.sorts" [value]="option.value">{{option.name}}</option>
+        </optgroup>
+<!--        <optgroup label="Board">-->
+<!--          <option value="name">Name</option>-->
+<!--          <option value="createdAt">Date</option>-->
+<!--        </optgroup>-->
+<!--        <optgroup label="Task">-->
+<!--          <option value="tasks_count.todo">Todo</option>-->
+<!--          <option value="tasks_count.progress">Progress</option>-->
+<!--          <option value="tasks_count.done">Done</option>-->
+<!--        </optgroup>-->
+      </select>
+      <select name="asc-desc" #order (change)="setOrder(order.value)">
+        <option value="ASC" >ASC</option>
+        <option value="DESC" selected>DESC</option>
+      </select>
+    </form>
+  </div>
+</div>

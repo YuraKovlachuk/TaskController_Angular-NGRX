@@ -1,0 +1,8 @@
+<div class="background" (click)="modalService.hide(modalKey)"></div>
+<div class="modal" [@fadeInOut]="">
+  <p class="modal__text">{{title}}</p>
+  <div class="buttons">
+    <app-btn (click)="modalService.hide(modalKey)"></app-btn>
+    <app-btn (click)="onClick()"></app-btn>
+  </div>
+</div>

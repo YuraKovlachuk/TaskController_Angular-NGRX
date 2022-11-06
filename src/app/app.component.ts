@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {getAllBoardRequest} from "./state/board/board.actions";
+import {Store} from "@ngrx/store";
+import {AppState} from "./state/app.state";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'taskControllerClient';
+export class AppComponent implements OnInit{
+  constructor(private store: Store<AppState>) {
+  }
+
+  ngOnInit(): void {
+    if(window.location.pathname.includes('/board')) {
+      this.store.dispatch(getAllBoardRequest())
+    }
+  }
 }

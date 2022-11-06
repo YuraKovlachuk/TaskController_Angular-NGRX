@@ -1,0 +1,46 @@
+<img id="image1" src="../../../assets/image/Saly-1.png" alt="background1"/>
+<img id="image2" src="../../../assets/image/Saly-10.png" alt="background2"/>
+<div class="register">
+  <div class="register__box">
+    <div class="register__text">
+      <p class="register__text-welcome">Welcome to <span class="text-purple">C</span>Task</p>
+      <div class="register__text-link">
+        <p>Have an account?</p>
+        <a class="text-purple" [routerLink]="['/login']">Sign in</a>
+      </div>
+    </div>
+    <h1 class="register__title">Sign up</h1>
+    <form action="" class="register__form" [formGroup]="form" (ngSubmit)="registerUser()">
+      <app-form-input [label]="'Enter your username'"
+                      [name]="'username'"
+                      [type]="'text'"
+                      [placeholder]="'Username'"
+                      [control]="username"
+                      [controlName]="'username'"
+                      [error$]="error$"
+                      [withError]="true"
+      ></app-form-input>
+      <div class="register__form-password">
+        <app-form-input [label]="'Enter your password'"
+                        [name]="'password'"
+                        [type]="'password'"
+                        [placeholder]="'Password'"
+                        [control]="password"
+                        [controlName]="'password'"
+        ></app-form-input>
+        <app-form-input
+                        [name]="'confirm-password'"
+                        [type]="'password'"
+                        [placeholder]="'Confirm password'"
+                        [control]="confirmPass"
+                        [controlName]="'confirmPass'"
+        ></app-form-input>
+        <span class="register__form-error"
+                *ngIf="form.errors && password.touched">
+            {{form.errors['notSamePass']}}
+        </span>
+      </div>
+      <app-form-button [disabled]="form.invalid" [text]="'Sign up'"></app-form-button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="background" (click)="modalService.hide(this.modalService.editModalKey)"></div>
+<div class="blur" (click)="modalService.hide(this.modalService.editModalKey)"></div>
+<div class="modal">
+  <h2 class="modal__title">{{title}}</h2>
+  <form class="modal__form" [formGroup]="form" (ngSubmit)="editTask()">
+    <app-form-input [label]="'Enter task name'"
+                    [name]="'board-name'"
+                    [type]="'text'"
+                    [placeholder]="'Name'"
+                    [control]="name"
+                    [controlName]="'name'"
+                    [error$]="error$"
+                    [withError]="true"
+    ></app-form-input>
+    <app-form-input [label]="'Enter description name'"
+                    [name]="'description'"
+                    [type]="'text'"
+                    [placeholder]="'Description'"
+                    [control]="description"
+                    [controlName]="'description'"
+    ></app-form-input>
+    <div class="modal__form-status">
+      <label for="cars">Status:</label>
+      <select id="cars" name="cars" [value]="task.status" formControlName="status">
+        <option value="TODO">Todo</option>
+        <option value="PROGRESS">Progress</option>
+        <option value="DONE">Done</option>
+      </select>
+    </div>
+    <div class="modal__form-file">
+      <div class="modal__form-btn">
+        <label for="image">Upload image</label>
+        <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg, image/gif"
+               (change)="selectFile($event)">
+        <app-btn type="reject" class="reject" [title]="'Remove'" *ngIf="url" (click)="url = ''; fileSource.reset()"></app-btn>
+      </div>
+      <p *ngIf="msg">{{msg}}</p>
+      <img [src]="url" alt="task-image" *ngIf="url">
+    </div>
+    <app-form-button [disabled]="form.invalid" [text]="title"></app-form-button>
+  </form>
+</div>

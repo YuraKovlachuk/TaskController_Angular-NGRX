@@ -1,0 +1,27 @@
+<app-filter-bar
+  [filters]="filters"
+  [sorts]="sort"
+  title="Dashboard"
+></app-filter-bar>
+<div class="board-list">
+  <app-create-board (click)="modalService.show(modalService.createModalKey)"></app-create-board>
+  <app-board
+    *ngFor="let board of boards | filter : (filterService.filterValue | async)! : (filterService.filterName | async)!
+    | orderBy : (filterService.sortBy! | async)! : (filterService.isDesc! | async)!"
+    [board]="board"
+    (boardIdEvent)="selectedBoardId = $event; modalService.show(modalService.infoModalKey)"
+    (deleteIdEvent)="deleteBoard($event);"></app-board>
+</div>
+<app-create-board-modal
+  [title]="'Add board'"
+  *ngIf="modalService.isShown(this.modalService.createModalKey)"
+></app-create-board-modal>
+<app-info-board-modal
+  *ngIf="modalService.isShown(modalService.infoModalKey)"
+  [board]="findBoardById()"
+></app-info-board-modal>
+<app-edit-board-modal
+  [title]="'Edit board'"
+  *ngIf="modalService.isShown(modalService.editModalKey)"
+  [board]="findBoardById()"
+></app-edit-board-modal>

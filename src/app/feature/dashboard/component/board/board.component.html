@@ -1,0 +1,10 @@
+<div (click)=" this.boardIdEvent.emit(tempBoard.dataset['id']);" class="board" tabindex="0"
+     [style.background-color]="board.color" [attr.data-id]="board._id" #tempBoard>
+  <div class="board__head">
+    <h2 class="board__head-title">{{board.name}}</h2>
+    <div tabindex="0" class="board__head-removeB"
+         (click)="this.deleteIdEvent.emit(tempBoard.dataset['id']); $event.stopPropagation()"></div>
+  </div>
+  <p class="board__desc">{{board.description}}</p>
+  <p class="board__date">{{board.createdAt | date:'mediumDate'}}</p>
+</div>

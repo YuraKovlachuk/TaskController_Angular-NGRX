@@ -1,0 +1,10 @@
+<div class="background" (click)="modalService.hide(modalService.archivedModalKey)"></div>
+<div class="blur" (click)="modalService.hide(modalService.archivedModalKey)"></div>
+<div class="modal">
+  <h2 class="modal__title">{{title}}</h2>
+  <div class="modal__tasks">
+    <app-task *ngFor="let task of archivedTasks" [task]="task"
+              (click)="modalService.hide(modalService.archivedModalKey)"></app-task>
+    <p class="modal__tasks-empty" *ngIf="!archivedTasks.length">No archived tasks</p>
+  </div>
+</div>

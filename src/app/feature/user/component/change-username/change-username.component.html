@@ -1,0 +1,19 @@
+<div class="change-main" (click)="isEditing = !isEditing">
+  <p class="change-main-title">Change username</p>
+  <span class="change-main-arrow" [ngClass]="isEditing ? 'close' : 'open'">&#8249;</span>
+</div>
+<div class="change-username" *ngIf="isEditing">
+  <form class="change-username__form" [formGroup]="form" (ngSubmit)="changeUsername()">
+    <app-form-input
+                    [name]="'change-username'"
+                    [type]="'text'"
+                    [placeholder]="'Username'"
+                    [control]="username"
+                    [controlName]="'username'"
+                    [error$]="error$"
+                    [withError]="true"
+                    newHeight="40px"
+    ></app-form-input>
+    <app-form-button [newHeight]="'40px'" [disabled]="form.invalid" [text]="'Change username'"></app-form-button>
+  </form>
+</div>

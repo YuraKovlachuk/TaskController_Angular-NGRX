@@ -1,0 +1,34 @@
+<img id="image1" src="../../../assets/image/Saly-1.png" alt="background1"/>
+<img id="image2" src="../../../assets/image/Saly-10.png" alt="background2"/>
+<div class="login">
+  <div class="login__box">
+    <div class="login__text">
+      <p class="login__text-welcome">Welcome to <span class="text-purple">C</span>Task</p>
+      <div class="login__text-link">
+        <p>No account?</p>
+        <a class="text-purple" [routerLink]="['/register']">Sign up</a>
+      </div>
+    </div>
+    <h1 class="login__title">Sign in</h1>
+    <form action="" class="login__form" [formGroup]="form" (ngSubmit)="loginUser()">
+      <app-form-input [label]="'Enter your username'"
+                      [name]="'username'"
+                      [type]="'text'"
+                      [placeholder]="'Username'"
+                      [control]="username"
+                      [controlName]="'username'"
+      ></app-form-input>
+      <app-form-input [label]="'Enter your password'"
+                      [name]="'password'"
+                      [type]="'password'"
+                      [placeholder]="'Password'"
+                      [control]="password"
+                      [controlName]="'password'"
+      ></app-form-input>
+      <app-form-button [disabled]="form.invalid" [text]="'Sign in'"></app-form-button>
+      <span class="login__form-error">
+            {{(error$ | async) || '&nbsp;'}}
+        </span>
+    </form>
+  </div>
+</div>

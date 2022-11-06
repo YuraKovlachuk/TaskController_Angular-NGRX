@@ -1,0 +1,99 @@
+@import "src/assets/styles/variable";
+
+$filter-padding: 7px 14px;
+
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 0 0;
+
+  &__title {
+    font-weight: 400;
+    font-size: 30px;
+    color: #E7E7E7;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    & input {
+      background: #1E1F24;
+      border: 1px solid $main-purple-color;
+      color: $text-color;
+      border-radius: 5px;
+      box-sizing: border-box;
+      padding: $filter-padding;
+      font-family: $font-family;
+      outline: none;
+      transition: .2s;
+    }
+
+    & input::placeholder {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #E7E7E7;
+    }
+
+    & input:focus {
+      border: 1px solid $dark-purple;
+    }
+
+    & select {
+      border:0!important;
+      background-color: $main-purple-color;
+      padding: 8px 14px;
+      cursor:pointer;
+      color: $text-color;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-family: $font-family;
+      outline: none;
+      transition: .2s;
+    }
+    & select::-ms-expand {
+      display: none;
+    }
+
+    & select:hover, & select:focus {
+      background: $dark-purple;
+      cursor: pointer;
+    }
+
+    & optgroup {
+      background: $text-color;
+      color: $main-purple-color;
+    }
+
+    & option {
+      background-color: $text-color;
+      color: $dark-color;
+      border-radius: 5px;
+    }
+
+    & option:disabled {
+     display: none;
+    }
+
+    & select:focus > option:checked {
+      box-shadow: 0 0 10px 100px $main-purple-color inset;
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill {
+  font-family: $font-family;
+  -webkit-text-fill-color: $text-color;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+}
+
+

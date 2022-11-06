@@ -1,0 +1,27 @@
+<div class="background" (click)="modalService.hide(modalService.infoModalKey)"></div>
+<div class="blur" (click)="modalService.hide(modalService.infoModalKey)"></div>
+<div class="modal">
+  <h2 class="modal__title">{{board.name}}</h2>
+  <p class="modal__date">{{board.createdAt | date: 'medium'}}</p>
+  <p class="modal__desc">{{board.description}}</p>
+  <div class="modal__tasks">
+    <div class="modal__tasks-wrapper">
+      <div class="modal__tasks-task">
+        <h4 class="modal__tasks-task-title">Todo</h4>
+        <p class="modal__tasks-task-count">{{board.tasks_count.todo}}</p>
+      </div>
+      <div class="modal__tasks-task">
+        <h4 class="modal__tasks-task-title">Progress</h4>
+        <p class="modal__tasks-task-count">{{board.tasks_count.progress}}</p>
+      </div>
+      <div class="modal__tasks-task">
+        <h4 class="modal__tasks-task-title">Done</h4>
+        <p class="modal__tasks-task-count">{{board.tasks_count.done}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal__btn-box">
+    <app-btn class="normal" [title]="'Go to board'" [routerLink]="['/board', board._id]"></app-btn>
+    <app-btn class="submit" [title]="'Edit'" (click)="toggleEdit()" ></app-btn>
+  </div>
+</div>

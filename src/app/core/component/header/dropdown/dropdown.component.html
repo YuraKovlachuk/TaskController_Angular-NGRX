@@ -1,0 +1,9 @@
+<div class="menu-container" dropdown (clickOutside)="clickedOutside()">
+  <div tabindex="0" class="menu-toggler" (click)="toggleMenu()">{{title}}
+    <span class="menu-arrow" [ngClass]="isMenuOpened ? 'close' : 'open'">&#8249;</span>
+  </div>
+  <div class="menu" *ngIf="isMenuOpened">
+    <div tabindex="0" [routerLink]="['/about']" class="menu-item">About</div>
+    <div tabindex="0" (click)="logout()" class="menu-item">Log out</div>
+  </div>
+</div>

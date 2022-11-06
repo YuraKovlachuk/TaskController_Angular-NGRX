@@ -1,0 +1,239 @@
+@import "src/assets/styles/variable";
+@import "src/app/shared/component/modals/modal";
+
+.modal {
+  color: $text-color;
+  padding: 20px 40px;
+  max-width: 600px;
+
+  &__img-box {
+    height: 140px;
+    width: 50%;
+    position: relative;
+    margin: 0 auto 15px auto;
+  }
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+
+    &-hover {
+      opacity: 0;
+      transition: .1s;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: $dark-color;
+      top:0;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    &-hover:hover {
+      opacity: 0.6;
+    }
+
+    &-hover label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 35px;
+      transform: translate(-50%, -50%);
+    }
+
+    &-hover label:hover {
+      cursor: pointer;
+      color: white
+    }
+
+    &-hover div {
+      position: absolute;
+      color: $text-color;
+      right: 5px;
+      transition: .2s;
+      font-size: 20px;
+    }
+
+    &-hover div:hover {
+      cursor: pointer;
+      color: #e71313;
+    }
+  }
+
+  &__title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px 0;
+
+    &-items {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-edit, &-archive, &-delete {
+      transition: .1s;
+      cursor: pointer;
+      font-size: 25px;
+    }
+
+    &-edit:hover, &-archive:hover, &-delete:hover {
+      filter: invert(25%);
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 25px;
+    margin: 0;
+
+    & span {
+      color: #989DF6;
+      font-size: 20px;
+    }
+  }
+
+  &__title-box input {
+    font-family: $font-family;
+    background: none;
+    border: 0;
+    outline: none;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 0;
+    color: $text-color;
+    border-bottom: 1px solid $main-purple-color;
+    padding: 0;
+
+
+  }
+
+  //&__title-box img {
+  //  height: 23px;
+  //  width: 23px;
+  //  object-fit: cover;
+  //  filter: invert(100%);
+  //  transition: .1s;
+  //  cursor: pointer;
+  //  //padding: 2px;
+  //  //border-radius: 5px;
+  //  //border: 1px solid transparent;
+  //}
+  //
+  //&__title-box img:hover {
+  //  filter: invert(75%);
+  //  //border: 1px solid #000;
+  //}
+
+  &__info {
+    margin: 10px 0 20px 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+    & p {
+      margin: 0;
+    }
+
+    &-item {
+      display: flex;
+      gap: 11%;
+
+      &-name {
+        width: 10%;
+        color: #989DF6;
+      }
+    }
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    border-top: 1px solid $text-color;
+    border-bottom: 1px solid $text-color;
+
+    &-title {
+      font-weight: 500;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    &-text {
+      margin: 10px 0 0 0;
+      font-weight: 400;
+      font-size: 16px;
+      word-wrap: break-word;
+    }
+  }
+
+  &__activity {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 0 0;
+
+    &-title {
+      font-weight: 500;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    &-add {
+      display: flex;
+      gap: 10px;
+
+      &-user {
+        vertical-align: middle;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        transition: .2s;
+        box-sizing: border-box;
+      }
+
+      & form {
+        width: 100%;
+      }
+    }
+
+    &-comments {
+      display: flex;
+      flex-direction: column;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+
+     &-comments::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+     &-comments::-webkit-scrollbar-thumb{
+      border-radius: 10px;
+      background: $text-color;
+    }
+
+     &-comments::-webkit-scrollbar-thumb:hover{
+      background: #b7b7b7;
+    }
+
+     &-comments::-webkit-scrollbar-thumb:active{
+      background: #9a9a9a;
+    }
+
+     &-comments::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: #505050;
+    }
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+

@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/styles/variable";
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: $black-color;
+  margin: 0;
+}
+
+.auth-body {
+  height: calc(100% - 62px);
+  background: linear-gradient(
+      to bottom,
+      $main-purple-color 0%,
+      $main-purple-color 50%,
+      $black-color 50%,
+      $black-color 100%
+  )
+}
+
+.active-head-link, .active-head-link:after {
+  color: $main-purple-color !important;
+}

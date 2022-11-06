@@ -1,0 +1,64 @@
+@import "src/assets/styles/variable";
+@import "src/app/shared/component/modals/modal";
+
+.modal {
+  padding: 33px;
+  color: $text-color;
+  &__title, &__date {
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 32px;
+  }
+
+  &__date {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  &__desc {
+    font-weight: 300;
+    font-size: 18px;
+    margin: 15px auto 30px auto;
+    word-wrap: break-word;
+  }
+
+  &__tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    &-wrapper {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    &-task {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-title, &-count {
+        margin: 0 auto;
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  &__btn-box {
+    margin: 28px 0 0 0;
+    display: flex;
+    flex-grow: 1;
+    gap: 5px;
+  }
+
+  app-btn {
+    width: 100%;
+  }
+
+}

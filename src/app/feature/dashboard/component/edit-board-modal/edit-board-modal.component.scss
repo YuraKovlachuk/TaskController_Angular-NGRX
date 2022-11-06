@@ -1,0 +1,35 @@
+@import "src/assets/styles/variable";
+@import "src/app/shared/component/modals/modal";
+
+.modal {
+  &__title {
+    color: $text-color;
+    margin: 0 auto 10px auto;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-color {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    &-color label {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #E7E7E7;
+    }
+
+    &-color input {
+      width: 30%;
+      border-radius: 5px;
+    }
+  }
+}
+
+

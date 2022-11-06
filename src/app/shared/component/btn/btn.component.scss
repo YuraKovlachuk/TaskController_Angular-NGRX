@@ -1,0 +1,68 @@
+@import "src/assets/styles/variable";
+
+button {
+  border: none;
+  width: 100%;
+  font-family: $font-family;
+  height: 54px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s;
+  outline: none;
+  color: $text-color;
+  border-radius: 10px;
+}
+
+.submit {
+  background: #0ACE82;
+}
+
+.submit:focus {
+  filter: brightness(80%);
+  color: lighten(#E7E7E7, 50%);
+}
+
+.submit:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+  color: lighten(#E7E7E7, 50%);
+}
+
+.submit:disabled {
+  cursor: default;
+  opacity: .9;
+}
+
+.normal {
+  background: #6356E5;
+}
+
+.normal:focus {
+  color: lighten(#E7E7E7, 50%);
+  background: $dark-purple;
+}
+
+.normal:hover {
+  cursor: pointer;
+  color: lighten(#E7E7E7, 50%);
+  background: $dark-purple;
+}
+
+.normal:disabled {
+  cursor: default;
+  opacity: .9;
+}
+
+.reject {
+  background: #b91919;
+  height: 40px;
+}
+
+.reject:hover {
+  cursor: pointer;
+  color: lighten(#E7E7E7, 50%);
+  background: #790606;
+}

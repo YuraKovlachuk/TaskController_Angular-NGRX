@@ -1,0 +1,22 @@
+<div class="comment" >
+  <img [src]="api + user.avatar" alt="user-avatar" class="comment__user">
+  <div class="comment__info">
+    <div class="comment__info-wrap">
+      <div class="comment__info-title">
+        <p class="comment__info-title-username">{{user.username}}</p>
+        <p class="comment__info-title-createdAt">{{getMinutesBetweenDates() + (comment.isEdited ? ' (edited)' : '')}}</p>
+      </div>
+      <div class="comment__info-func">
+        <div class="comment__info-func-edit" title="Edit" *ngIf="!isEditing" (click)="isEditing = !isEditing">&#9998;</div>
+        <div class="comment__info-func-submit" title="Submit" *ngIf="isEditing" (click)="submitEdit()">&#10003;</div>
+        <div class="comment__info-func-delete" (click)="submitDelete()">&#10005;</div>
+      </div>
+    </div>
+    <p class="comment__info-text" *ngIf="!isEditing">{{comment.text}}</p>
+    <textarea name="comment" rows="2" *ngIf="isEditing" [value]="comment.text"
+              (onInit)="textarea.focus()"
+              (change)="newText = textarea.value"
+              ngInit
+              #textarea></textarea>
+  </div>
+</div>

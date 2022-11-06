@@ -1,0 +1,29 @@
+@import "../../../assets/styles/variable";
+
+.page404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+  font-family: $font-family;
+
+  &__wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $text-color;
+    flex-direction: column;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $main-purple-color;
+    font-size: 20px;
+  }
+
+  &__link:hover {
+    text-decoration: underline;
+  }
+
+
+}

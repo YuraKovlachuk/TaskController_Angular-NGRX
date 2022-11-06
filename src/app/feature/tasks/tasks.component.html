@@ -1,0 +1,35 @@
+<app-filter-bar
+  [filters]="filters"
+  [sorts]="sort"
+  [title]="board.name"></app-filter-bar>
+<div class="archived">
+  <span class="archived-list material-icons" title="Archived tasks"
+        (click)="modalService.show(modalService.archivedModalKey)">&#xe149;</span>
+</div>
+<div class="columns">
+  <app-column [name]="'Todo'" [tasks]="getTaskByStatus('TODO')" [boardId]="board._id"
+              [inputColor]="'todoColor'" [color]="board.column_color.todo"></app-column>
+  <app-column [name]="'Progress'" [tasks]="getTaskByStatus('PROGRESS')" [boardId]="board._id"
+              [inputColor]="'progressColor'" [color]="board.column_color.progress"></app-column>
+  <app-column [name]="'Done'" [tasks]="getTaskByStatus('DONE')" [boardId]="board._id"
+              [inputColor]="'doneColor'" [color]="board.column_color.done"></app-column>
+</div>
+<app-create-task-modal
+  [boardId]="board._id"
+  [title]="'Add task'"
+  *ngIf="modalService.isShown(modalService.createModalKey)">
+</app-create-task-modal>
+<app-info-task-modal
+  [task]="(task$ | async)!"
+  *ngIf="modalService.isShown(modalService.infoModalKey)">
+</app-info-task-modal>
+<app-edit-task-modal
+  [title]="'Edit task'"
+  [task]="(task$ | async)!"
+  *ngIf="modalService.isShown(modalService.editModalKey)">
+</app-edit-task-modal>
+<app-archived-list-modal
+  [title]="'Archived'"
+  [archivedTasks]="getArchivedTasks()"
+  *ngIf="modalService.isShown(modalService.archivedModalKey)"
+></app-archived-list-modal>

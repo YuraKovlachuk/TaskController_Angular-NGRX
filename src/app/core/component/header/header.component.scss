@@ -1,0 +1,136 @@
+@import "src/assets/styles/variable";
+
+.header {
+  background-color: $dark-color;
+  &__nav {
+    min-height: 62px;
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &__logo:hover {
+    cursor: pointer;
+  }
+
+  &__logo-img {
+    height: 2.25rem;
+    margin-right: 0.75rem;
+  }
+
+  &__logo-text {
+    color: white;
+    font-weight: 700;
+    font-size: 30px;
+  }
+
+  &__pages {
+    justify-content: center;
+    display: flex;
+    width: auto;
+    align-items: center;
+    gap: 45px;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__pages li, &__auth span {
+    position: relative;
+  }
+
+  &__pages-link, &__auth-link {
+    text-decoration: none;
+    color: $text-color;
+    position: relative;
+    font-size: 18px;
+  }
+
+  &__pages-link:after, &__auth-link:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    border-radius: 5px;
+    position: absolute;
+    background: $text-color;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+
+  &__pages-link:hover:after, &__auth-link:hover:after {
+    width: 100%;
+    left: 0;
+  }
+
+  &__pages-link:focus, &__auth-link:focus {
+    color: white;
+  }
+
+
+  &__auth {
+    justify-content: center;
+    display: flex;
+    width: auto;
+    align-items: center;
+    gap: 45px;
+    list-style: none;
+    padding: 0;
+
+    &-box a{
+      background-color: $main-purple-color;
+      padding: 8px 21px;
+      line-height: 33px;
+      color: $text-color;
+      border-radius: 10px;
+      text-decoration: none;
+      top: 0;
+      transition: top ease .2s;
+      position: relative;
+    }
+
+    &-box a:hover {
+      color: lighten($text-color, 50%);
+      top: -2px;
+    }
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &-photo {
+      vertical-align: middle;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      transition: .2s;
+      box-sizing: border-box;
+    }
+
+    &-photo:hover {
+      cursor: pointer;
+      transform: scale(1.07);
+      box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    }
+
+    &-username {
+      color: $text-color
+    }
+  }
+}
+
+.text-purple {
+  color: $main-purple-color
+}
