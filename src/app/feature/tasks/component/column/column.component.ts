@@ -42,8 +42,8 @@ export class ColumnComponent implements OnInit {
     this.eventSubscribe = fromEvent<InputEvent>(this.colorInput.nativeElement, "input").pipe(
       map((e) => {
         const input = e.target as HTMLInputElement
+        console.log(input)
         this.color = input.value
-        console.log(input.value)
         return input.value
       }),
       debounceTime(1000),
