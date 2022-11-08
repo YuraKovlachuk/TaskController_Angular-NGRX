@@ -24,14 +24,14 @@
     ></app-form-input>
     <div class="modal__form-color">
       <label for="color">Choose the color of board</label>
-      <input formControlName="color" type="color" name="color" id="color" list="boardColors">
-      <datalist id="boardColors">
-        <option value="#6356E5">#6356E5</option>
-        <option value="#fe7f2e">#fe7f2e</option>
-        <option value="#1da7ff">#1da7ff</option>
-        <option value="#0ace82">#0ace82</option>
-        <option value="#ed8d9b">#ed8d9b</option>
-      </datalist>
+      <input formControlName="color" type="color" name="color" id="color">
+<!--      <datalist id="boardColors">-->
+<!--        <option value="#6356E5">#6356E5</option>-->
+<!--        <option value="#fe7f2e">#fe7f2e</option>-->
+<!--        <option value="#1da7ff">#1da7ff</option>-->
+<!--        <option value="#0ace82">#0ace82</option>-->
+<!--        <option value="#ed8d9b">#ed8d9b</option>-->
+<!--      </datalist>-->
     </div>
     <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Creating...' : title"></app-form-button>
   </form>
