@@ -4,7 +4,7 @@
     <div class="menu">
       <div tabindex="0" class="menu-item" (click)="edit.emit()">Edit</div>
       <div tabindex="0" class="menu-item" (click)="delete.emit()">
-        {{(isDeleting$ | async) ? 'Loading...' : 'Delete' }}</div>
+        {{(isDeleting$ | async) ? 'Deleting...' : 'Delete' }}</div>
       <div tabindex="0" class="menu-item" *ngIf="!isArchived" (click)="archive.emit()">
         {{(isArchiving$ | async) ? 'Archiving...' : 'Archive' }}</div>
       <div tabindex="0" class="menu-item" *ngIf="isArchived" (click)="archive.emit()">

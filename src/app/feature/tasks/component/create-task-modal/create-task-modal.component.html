@@ -33,6 +33,6 @@
       <img [hidden]="isImageLoading" (load)="onLoad()" [src]="url" alt="newImage" *ngIf="url">
       <app-spinner *ngIf="isImageLoading && url"></app-spinner>
     </div>
-    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Loading...' : title"></app-form-button>
+    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Creating...' : title"></app-form-button>
   </form>
 </div>

@@ -41,6 +41,6 @@
       <img [hidden]="isImageLoaded" (load)="onLoad()" [src]="url" alt="task-image" *ngIf="url">
       <app-spinner *ngIf="isImageLoaded && url"></app-spinner>
     </div>
-    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Loading...' : title"></app-form-button>
+    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Editing...' : title"></app-form-button>
   </form>
 </div>
