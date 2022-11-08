@@ -4,7 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActionsSubject, Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {addBoardRequest, addBoardSuccess, clearError, editBoardSuccess} from "../../../../state/board/board.actions";
-import {boardsErrorSelector} from "../../../../state/board/board.selectors";
+import {boardsErrorSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
 import {Subscription, take, takeUntil} from "rxjs";
 import {ofType} from "@ngrx/effects";
 
@@ -17,6 +17,7 @@ export class CreateBoardModalComponent implements OnInit {
   @Input() title: string;
   form: FormGroup;
   error$ = this.store.select(boardsErrorSelector)
+  isLoading$ = this.store.select(isLoadingBoard)
   isSuccess: Subscription
 
   constructor(
@@ -61,7 +62,6 @@ export class CreateBoardModalComponent implements OnInit {
         Validators.maxLength(15)
       ]),
       description: new FormControl(null, [
-        Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),

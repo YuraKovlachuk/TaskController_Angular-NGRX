@@ -12,26 +12,16 @@
     width: 100%;
     font-size: 12px;
     color: #e71313;
-  }
-
-  &__exit {
-    position: absolute;
-    color: $text-color;
-    top: 5px;
-    right: 10px;
-    transition: .2s;
-    font-size: 20px;
-  }
-
-  &__exit:hover {
-    color: white;
-    cursor: pointer;
+    word-break: break-all;
   }
 
   &__avatar-box {
     width: 130px;
     height: 130px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__avatar {
@@ -59,6 +49,10 @@
       opacity: 0.6;
     }
 
+    &-hover:focus-within {
+      opacity: 0.6;
+    }
+
     &-hover label {
       margin: 0;
       position: absolute;
@@ -79,19 +73,24 @@
     gap: 25px;
     margin: 10px 0 0 0;
 
-    & p {
+    & button {
+      font-family: $font-family;
       margin: 0;
+      color: $text-color;
+      padding: 0;
+      background: none;
+      border: none;
       font-size: 16px;
       transition: .2s;
       cursor: pointer;
     }
 
     &-submit:hover {
-      color:$main-purple-color;
+      color:$main-purple-color !important;
     }
 
     &-remove:hover {
-      color:#e71313;
+      color:#e71313 !important;
     }
   }
 }

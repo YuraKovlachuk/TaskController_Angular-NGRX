@@ -1,17 +1,19 @@
 <div class="background"></div>
 <div class="blur" (click)="modalService.hide(modalService.editModalKey)"></div>
 <div class="modal">
-  <div class="modal__exit" (click)="modalService.hide(modalService.editModalKey)">&#10005;</div>
+  <button tabindex="0" class="modal__exit" (click)="modalService.hide(modalService.editModalKey)"
+          ngInit (onInit)="el.focus()" #el>&#10005;</button>
   <div class="modal__avatar-box">
-    <img [src]="url" class="modal__avatar" alt="user-avatar"/>
-    <div class="modal__avatar-hover">
-      <label class="material-icons" for="image">&#xe3b6;</label>
+    <img [hidden]="isImageLoaded" (load)="onLoad()" [src]="url" class="modal__avatar" alt="user-avatar"/>
+    <app-spinner *ngIf="isImageLoaded && url"></app-spinner>
+    <div class="modal__avatar-hover" *ngIf="!isImageLoaded && url">
+      <label (keydown.enter)="image.click()" tabindex="0" class="material-icons" for="image" #image>&#xe3b6;</label>
       <input type="file" name="avatar" id="image" accept="image/png, image/jpg, image/jpeg" (change)="selectFile($event)">
     </div>
   </div>
   <p class="modal__error" *ngIf="msg || (error$ | async)">{{msg || (error$ | async)}}</p>
   <div class="modal__buttons">
-    <p class="modal__buttons-submit" (click)="uploadAvatar()">Submit</p>
-    <p class="modal__buttons-remove" (click)="removeAvatar()">Remove</p>
+    <button class="modal__buttons-submit" (click)="uploadAvatar()">Submit</button>
+    <button class="modal__buttons-remove" (click)="removeAvatar()">Remove</button>
   </div>
 </div>

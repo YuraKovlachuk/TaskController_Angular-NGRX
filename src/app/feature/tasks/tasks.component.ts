@@ -9,6 +9,7 @@ import {ModalService} from "../../services/modal.service";
 import {Title} from "@angular/platform-browser";
 import {FilterService} from "../../services/filter.service";
 import {setBoardId} from "../../state/board/board.actions";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-tasks',
@@ -36,13 +37,15 @@ export class TasksComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public modalService: ModalService,
-    private titleService: Title)
+    private titleService: Title,
+    private storageService: StorageService)
   {
     this.titleService.setTitle(this.board.name + ' - CTask');
   }
 
   ngOnInit(): void {
     this.store.dispatch(setBoardId({boardId: this.board._id}))
+
   }
 
   ngOnDestroy() {

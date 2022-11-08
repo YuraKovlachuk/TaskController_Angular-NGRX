@@ -15,7 +15,7 @@ import {
   getAllBoardRequest,
   getAllBoardSuccess
 } from "./board.actions";
-import {mergeMap, of} from "rxjs";
+import { mergeMap, of} from "rxjs";
 import {BoardService} from "../../services/board.service";
 import {catchError, map} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";

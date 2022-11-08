@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/app.state";
 import {clearError, registerRequest} from "../../state/auth/auth.actions";
-import {authErrorSelector} from "../../state/auth/auth.selectors";
+import {authErrorSelector, isLoadingAuth} from "../../state/auth/auth.selectors";
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,7 @@ import {authErrorSelector} from "../../state/auth/auth.selectors";
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   error$ = this.store.select(authErrorSelector)
+  isLoading$ = this.store.select(isLoadingAuth)
 
   constructor(
     public router: Router,

@@ -1,6 +1,8 @@
 <div class="background" (click)="modalService.hide(modalService.infoModalKey)"></div>
 <div class="blur" (click)="modalService.hide(modalService.infoModalKey)"></div>
 <div class="modal">
+  <button tabindex="0" class="modal__exit" (click)="modalService.hide(modalService.infoModalKey)"
+          ngInit (onInit)="el.focus()" #el>&#10005;</button>
   <h2 class="modal__title">{{board.name}}</h2>
   <p class="modal__date">{{board.createdAt | date: 'medium'}}</p>
   <p class="modal__desc">{{board.description}}</p>

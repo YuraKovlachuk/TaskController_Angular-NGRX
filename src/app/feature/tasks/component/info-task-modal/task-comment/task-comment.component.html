@@ -7,13 +7,15 @@
         <p class="comment__info-title-createdAt">{{getMinutesBetweenDates() + (comment.isEdited ? ' (edited)' : '')}}</p>
       </div>
       <div class="comment__info-func">
-        <div class="comment__info-func-edit" title="Edit" *ngIf="!isEditing" (click)="isEditing = !isEditing">&#9998;</div>
-        <div class="comment__info-func-submit" title="Submit" *ngIf="isEditing" (click)="submitEdit()">&#10003;</div>
-        <div class="comment__info-func-delete" (click)="submitDelete()">&#10005;</div>
+        <button class="comment__info-func-edit" title="Edit" *ngIf="!isEditing && !(isDeleting$ | async)" (click)="isEditing = !isEditing">&#9998;</button>
+        <button class="comment__info-func-submit" title="Submit" *ngIf="isEditing" (click)="submitEdit()">&#10003;</button>
+        <button class="comment__info-func-delete" (click)="submitDelete()">
+          {{(isDeleting$ | async) ? 'Deleting...' : "&#10005;"}}</button>
+        <app-spinner className="very-small" *ngIf="isDeleting$ | async"></app-spinner>
       </div>
     </div>
-    <p class="comment__info-text" *ngIf="!isEditing">{{comment.text}}</p>
-    <textarea name="comment" rows="2" *ngIf="isEditing" [value]="comment.text"
+    <p class="comment__info-text" *ngIf="!isEditing">{{commentText}}</p>
+    <textarea name="comment" rows="2" *ngIf="isEditing" [value]="commentText"
               (onInit)="textarea.focus()"
               (change)="newText = textarea.value"
               ngInit

@@ -3,7 +3,7 @@ import {ModalService} from "../../../../services/modal.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ITask} from "../../../../models/ITask";
 import {environment} from "../../../../../environments/environment";
-import {Store} from "@ngrx/store";
+import {ActionsSubject, Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {
   addTaskCommentRequest, archiveTaskRequest,
@@ -12,10 +12,11 @@ import {
   editTaskRequest, editTaskSuccess
 } from "../../../../state/task/task.actions";
 import {userSelector} from "../../../../state/auth/auth.selectors";
-import {take} from "rxjs";
-import {clearError} from "../../../../state/board/board.actions";
+import {Subscription, take} from "rxjs";
+import {addBoardSuccess, clearError} from "../../../../state/board/board.actions";
 import {IComment} from "../../../../models/IComment";
 import {ofType} from "@ngrx/effects";
+import {isArchiving, isCommentLoading, isDeleting, isLoadingBoard} from "../../../../state/board/board.selectors";
 
 @Component({
   selector: 'app-info-task-modal',
@@ -25,16 +26,28 @@ import {ofType} from "@ngrx/effects";
 export class InfoTaskModalComponent implements OnInit {
   @Input() task: ITask
 
+  taskName: string
   form: FormGroup
   api = environment.URL;
   isEditing = false
+  isSuccess: Subscription
 
   user$ = this.store.select(userSelector);
+  isDeleting$ = this.store.select(isDeleting)
+  isLoading$ = this.store.select(isLoadingBoard)
+  isArchiving$ = this.store.select(isArchiving)
+  isCommentLoading$ = this.store.select(isCommentLoading)
+  isImageLoaded = true;
 
   constructor(
     public modalService: ModalService,
-    private store: Store<AppState>) {
+    private store: Store<AppState>,
+    private actionsSubj: ActionsSubject) {
     this._createForm()
+  }
+
+  onLoad() {
+    this.isImageLoaded = false;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -45,6 +58,16 @@ export class InfoTaskModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.taskName = this.task.name
+  }
+
+  reverseComments(): IComment[] {
+    const {comments} = this.task
+    return comments.length ? [...comments].reverse() : comments
+  }
+
+  ngOnDestroy() {
+    this.isSuccess?.unsubscribe()
   }
 
   get comment() {
@@ -73,6 +96,12 @@ export class InfoTaskModalComponent implements OnInit {
       mimeType !== 'image/gif') {
       return;
     }
+    let fileSizeKB = Math.round(event.target.files[0].size / 1024)
+    const optimalSize = 1024 * 4
+    if(fileSizeKB > optimalSize) {
+      return;
+    }
+    this.isImageLoaded = true;
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
@@ -85,8 +114,7 @@ export class InfoTaskModalComponent implements OnInit {
     if(newName.length < 2 || newName.length > 15 || newName === this.task.name) {
       return
     }
-
-
+    this.taskName = newName;
     const {boardId, _id: taskId} = this.task
     const formData = new FormData();
     formData.append('name', newName);
@@ -115,7 +143,8 @@ export class InfoTaskModalComponent implements OnInit {
   deleteTask() {
     const {_id: taskId, boardId, status} = this.task
     this.store.dispatch(deleteTaskRequest({taskId, boardId, status}))
-    this.modalService.hide(this.modalService.infoModalKey)
+    this.isSuccess = this.actionsSubj.pipe(ofType(deleteTaskSuccess))
+      .subscribe(() => this.modalService.hide(this.modalService.infoModalKey));
   }
 
   addComment() {

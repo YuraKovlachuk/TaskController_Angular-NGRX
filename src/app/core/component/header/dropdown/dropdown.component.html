@@ -1,9 +1,9 @@
 <div class="menu-container" dropdown (clickOutside)="clickedOutside()">
-  <div tabindex="0" class="menu-toggler" (click)="toggleMenu()">{{title}}
+  <div tabindex="0" class="menu-toggler" (click)="toggleMenu()" appFocused (focused)="toggleMenu()">{{title}}
     <span class="menu-arrow" [ngClass]="isMenuOpened ? 'close' : 'open'">&#8249;</span>
   </div>
   <div class="menu" *ngIf="isMenuOpened">
-    <div tabindex="0" [routerLink]="['/about']" class="menu-item">About</div>
-    <div tabindex="0" (click)="logout()" class="menu-item">Log out</div>
+    <a tabindex="0" [routerLink]="['/about']" class="menu-item">About</a>
+    <a tabindex="0" appFocused (focused)="logout()" (click)="logout()" class="menu-item">Log out</a>
   </div>
 </div>

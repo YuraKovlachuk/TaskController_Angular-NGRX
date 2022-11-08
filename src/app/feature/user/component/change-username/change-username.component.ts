@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {authErrorSelector, usernameErrorSelector} from "../../../../state/auth/auth.selectors";
+import {authErrorSelector, isUsernameLoading, usernameErrorSelector} from "../../../../state/auth/auth.selectors";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {take} from "rxjs";
@@ -17,6 +17,7 @@ export class ChangeUsernameComponent implements OnInit {
   @Input() user: IUser
   form: FormGroup;
   error$ = this.store.select(usernameErrorSelector)
+  isLoading$ = this.store.select(isUsernameLoading)
   isEditing = false
 
   constructor(private store: Store<AppState>) { }
@@ -48,6 +49,7 @@ export class ChangeUsernameComponent implements OnInit {
 
     this.form.valueChanges.pipe(take(1))
       .subscribe(() => this.store.dispatch(clearError()));
+    this.form.reset()
   }
 
 }

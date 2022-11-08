@@ -1,4 +1,5 @@
-<div (click)=" this.boardIdEvent.emit(tempBoard.dataset['id']);" class="board" tabindex="0"
+<div (keyup.enter)="this.boardIdEvent.emit(tempBoard.dataset['id'])"
+     (click)=" this.boardIdEvent.emit(tempBoard.dataset['id']);" class="board" tabindex="0"
      [style.background-color]="board.color" [attr.data-id]="board._id" #tempBoard>
   <div class="board__head">
     <h2 class="board__head-title">{{board.name}}</h2>

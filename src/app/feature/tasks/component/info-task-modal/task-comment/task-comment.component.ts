@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IComment} from "../../../../../models/IComment";
 import {environment} from "../../../../../../environments/environment";
 import {IUser} from "../../../../../models/IUser";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../../../state/app.state";
+import {isCommentDeleting} from "../../../../../state/board/board.selectors";
 
 @Component({
   selector: 'app-task-comment',
@@ -17,11 +20,15 @@ export class TaskCommentComponent implements OnInit {
 
   isEditing = false
   newText: string
+  commentText: string
   api = environment.URL;
 
-  constructor() { }
+  isDeleting$ = this.store.select(isCommentDeleting)
+
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.commentText = this.comment.text
   }
 
   getDaysInMonth(year: number, month: number) {
@@ -57,6 +64,7 @@ export class TaskCommentComponent implements OnInit {
     if(this.newText === this.comment.text ||
       this.newText.length < 2 ||
       this.newText.length > 120) {return}
+    this.commentText = this.newText
     this.edit.emit({_id: this.comment._id, text: this.newText, isEdited: true})
   }
 

@@ -40,6 +40,24 @@
   padding: 40px;
   display: flex;
   flex-direction: column;
+
+  &__exit {
+    position: absolute;
+    color: $text-color;
+    top: 5px;
+    right: 10px;
+    transition: .2s;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+
+  &__exit:hover {
+    color: $main-purple-color;
+    cursor: pointer;
+  }
 }
 
 input:-webkit-autofill,

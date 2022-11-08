@@ -6,7 +6,7 @@
   <div class="column__title-box">
     <h2 class="column__title">{{name}}</h2>
     <div class="column__color-box">
-      <input type="color" [name]="inputColor" [id]="inputColor" list="columnColors" #colorInput>
+      <input type="color" tabindex="-1" [name]="inputColor" [id]="inputColor" list="columnColors" #colorInput>
       <datalist id="columnColors">
         <option value="#242948">#242948</option>
         <option value="#6356E5">#6356E5</option>
@@ -15,13 +15,15 @@
         <option value="#0ace82">#0ace82</option>
         <option value="#ed8d9b">#ed8d9b</option>
       </datalist>
-      <label [for]="inputColor" class="column__color material-icons">&#xe3b7;</label>
+      <label [for]="inputColor" class="column__color material-icons"
+             (keydown.enter)="color.click()" tabindex="0" #color>&#xe3b7;</label>
     </div>
   </div>
   <div class="column__tasks" [ngStyle]="{'background-color': color}">
     <app-create-tasks
       (click)="onClick()"></app-create-tasks>
     <div class="column__tasks-wrap">
+      <app-spinner *ngIf="isLoading$ | async"></app-spinner>
       <app-task *ngFor="let task of tasks | filter : (filterService.filterValue | async)! : (filterService.filterName | async)!
     | orderBy : (filterService.sortBy! | async)! : (filterService.isDesc! | async)!" [task]="task"></app-task>
     </div>

@@ -1,10 +1,19 @@
 import {createReducer, on} from "@ngrx/store";
-import {authFailure, clearError, isAuth, loginSuccess, logout} from "./auth.actions";
+import {
+  authFailure,
+  clearError,
+  isAuth,
+  loginRequest,
+  loginSuccess,
+  logout,
+  registerRequest,
+  registerSuccess
+} from "./auth.actions";
 import {IUser} from "../../models/IUser";
 import {
   clearSuccessMessage,
-  deleteUserAvatarSuccess, deleteUserSuccess, editPasswordFailure,
-  editPasswordSuccess, editUsernameFailure,
+  deleteUserAvatarSuccess, deleteUserSuccess, editPasswordFailure, editPasswordRequest,
+  editPasswordSuccess, editUsernameFailure, editUsernameRequest,
   editUsernameSuccess,
   uploadUserAvatarSuccess
 } from "../user/user.actions";
@@ -15,7 +24,10 @@ export interface AuthState {
   error: string
   usernameError: string
   passwordError: string
+  isUsernameLoading: boolean
+  isPasswordLoading: boolean
   successChangePassword: string
+  isLoading: boolean
 }
 
 const initialState: AuthState = {
@@ -24,20 +36,33 @@ const initialState: AuthState = {
   error: '',
   usernameError: '',
   passwordError: '',
-  successChangePassword: ''
+  isUsernameLoading: false,
+  isPasswordLoading: false,
+  successChangePassword: '',
+  isLoading: false
 };
 
 export const authReducer = createReducer(
   initialState,
   on(loginSuccess, (state, {user}) => ({
     ...state,
-    user: {...user}
+    user: {...user},
+    isLoading: false
   })),
-  on(authFailure, (state, {error}) =>({
+  on(registerRequest, loginRequest, (state) => ({
     ...state,
-    error: error
+    isLoading: true
   })),
-  on(clearError, (state) =>({
+  on(registerSuccess, (state) => ({
+    ...state,
+    isLoading: false
+  })),
+  on(authFailure, (state, {error}) => ({
+    ...state,
+    error: error,
+    isLoading: false
+  })),
+  on(clearError, (state) => ({
     ...state,
     error: '',
     passwordError: '',
@@ -52,20 +77,30 @@ export const authReducer = createReducer(
     user: {...user}
   })),
   on(uploadUserAvatarSuccess, (state, {avatar}) => ({
-      ...state,
-      user: {...state.user!, avatar}
+    ...state,
+    user: {...state.user!, avatar}
   })),
   on(deleteUserAvatarSuccess, (state) => ({
     ...state,
     user: {...state.user!, avatar: state.defaultAvatar}
   })),
+  on(editUsernameRequest, (state) => ({
+    ...state,
+    isUsernameLoading: true
+  })),
   on(editUsernameSuccess, (state, {username}) => ({
     ...state,
-    user: {...state.user!, username}
+    user: {...state.user!, username},
+    isUsernameLoading: false
   })),
-  on(editPasswordSuccess, (state, {message})=>({
+  on(editPasswordRequest, (state) => ({
     ...state,
-    successChangePassword: message
+    isPasswordLoading: true
+  })),
+  on(editPasswordSuccess, (state, {message}) => ({
+    ...state,
+    successChangePassword: message,
+    isPasswordLoading: false
   })),
   on(clearSuccessMessage, (state) => ({
     ...state,
@@ -77,10 +112,12 @@ export const authReducer = createReducer(
   })),
   on(editUsernameFailure, (state, {error}) => ({
     ...state,
-    usernameError: error
+    usernameError: error,
+    isUsernameLoading: false
   })),
   on(editPasswordFailure, (state, {error}) => ({
     ...state,
-    passwordError: error
+    passwordError: error,
+    isPasswordLoading: false
   }))
 )

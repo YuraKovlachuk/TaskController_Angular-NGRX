@@ -3,7 +3,7 @@ import {ITask} from "../../../../models/ITask";
 import {ModalService} from "../../../../services/modal.service";
 import {TaskService} from "../../../../services/task.service";
 import {FilterService} from "../../../../services/filter.service";
-import {taskSelectById} from "../../../../state/board/board.selectors";
+import {boardsLoadingSelector, taskSelectById, tasksLoadingSelector} from "../../../../state/board/board.selectors";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {editTaskRequest} from "../../../../state/task/task.actions";
@@ -23,6 +23,8 @@ export class ColumnComponent implements OnInit {
   @Input() tasks: ITask[]
   @Input() inputColor: string
   @Input() color: string
+
+  isLoading$ = this.store.select(boardsLoadingSelector)
 
   @ViewChild("colorInput", {static: true}) colorInput: ElementRef;
   eventSubscribe: Subscription
@@ -54,18 +56,6 @@ export class ColumnComponent implements OnInit {
   ngOnDestroy() {
     this.eventSubscribe.unsubscribe()
   }
-
-  // dragOver (e: any) {
-  //   e.preventDefault()
-  // }
-  //
-  // dragEnter (e: any) {
-  //   e.preventDefault()
-  // }
-  //
-  // dragLeave (e: any) {
-  //   e.preventDefault()
-  // }
 
   dragDrop () {
     const formData = new FormData();

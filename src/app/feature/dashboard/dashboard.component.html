@@ -4,7 +4,8 @@
   title="Dashboard"
 ></app-filter-bar>
 <div class="board-list">
-  <app-create-board (click)="modalService.show(modalService.createModalKey)"></app-create-board>
+  <app-create-board *ngIf="!(isLoading$ | async)" (click)="modalService.show(modalService.createModalKey)"></app-create-board>
+  <app-spinner className="large" *ngIf="isLoading$ | async"></app-spinner>
   <app-board
     *ngFor="let board of boards | filter : (filterService.filterValue | async)! : (filterService.filterName | async)!
     | orderBy : (filterService.sortBy! | async)! : (filterService.isDesc! | async)!"

@@ -1,6 +1,7 @@
 @import "src/assets/styles/variable";
 @import "src/app/shared/component/modals/modal";
 
+
 .modal {
   color: $text-color;
   padding: 20px 40px;
@@ -11,6 +12,9 @@
     width: 50%;
     position: relative;
     margin: 0 auto 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__img {
@@ -35,6 +39,10 @@
       opacity: 0.6;
     }
 
+    &-hover:focus-within {
+      opacity: 0.6;
+    }
+
     &-hover label {
       position: absolute;
       top: 50%;
@@ -48,15 +56,19 @@
       color: white
     }
 
-    &-hover div {
+    &-hover button {
       position: absolute;
       color: $text-color;
       right: 5px;
       transition: .2s;
       font-size: 20px;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
     }
 
-    &-hover div:hover {
+    &-hover button:hover {
       cursor: pointer;
       color: #e71313;
     }
@@ -79,10 +91,16 @@
       transition: .1s;
       cursor: pointer;
       font-size: 25px;
+      background: 0;
+      color: $text-color;
+      border: none;
+      margin: 0;
+      padding: 0;
     }
 
     &-edit:hover, &-archive:hover, &-delete:hover {
-      filter: invert(25%);
+      //filter: invert(25%);
+      color: $main-purple-color;
     }
   }
 
@@ -186,6 +204,7 @@
     &-add {
       display: flex;
       gap: 10px;
+      align-items: center;
 
       &-user {
         vertical-align: middle;
@@ -198,7 +217,25 @@
 
       & form {
         width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 5px;
       }
+
+      & form button {
+        border: none;
+        height: 54px;
+        font-size: 32px;
+        background: none;
+        transition: .2s;
+        color: $text-color;
+        cursor: pointer;
+      }
+
+      & form button:hover {
+        color: $main-purple-color;
+      }
+
     }
 
     &-comments {
@@ -206,7 +243,12 @@
       flex-direction: column;
       max-height: 130px;
       overflow-y: auto;
+
+      & app-spinner {
+        align-self: center;
+      }
     }
+
 
      &-comments::-webkit-scrollbar {
       width: 6px;
@@ -235,5 +277,9 @@
 
 input[type="file"] {
   display: none;
+}
+
+app-form-input {
+  width: 100%;
 }
 

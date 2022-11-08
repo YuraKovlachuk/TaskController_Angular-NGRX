@@ -1,6 +1,8 @@
 <div class="background" (click)="modalService.hide(modalService.createModalKey)"></div>
 <div class="blur" (click)="modalService.hide(modalService.createModalKey)"></div>
 <div class="modal">
+  <button tabindex="0" class="modal__exit" (click)="modalService.hide(modalService.createModalKey)"
+          ngInit (onInit)="el.focus()" #el>&#10005;</button>
   <h2 class="modal__title">{{title}}</h2>
   <form class="modal__form" [formGroup]="form" (ngSubmit)="addTask()">
     <app-form-input [label]="'Enter task name'"
@@ -11,6 +13,7 @@
                     [controlName]="'name'"
                     [error$]="error$"
                     [withError]="true"
+                    [isAutofocus]="true"
     ></app-form-input>
     <app-form-input [label]="'Enter description name'"
                     [name]="'description'"
@@ -21,14 +24,15 @@
     ></app-form-input>
     <div class="modal__form-file">
       <div class="modal__form-btn">
-        <label for="image">Upload image</label>
+        <label tabindex="0" (keydown.enter)="image.click()" for="image" #image>Upload image</label>
         <input formControlName="image" type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg, image/gif"
                (change)="selectFile($event)">
         <app-btn type="reject" class="reject" [title]="'Remove'" *ngIf="url" (click)="url = ''; fileSource.reset()"></app-btn>
       </div>
       <p *ngIf="msg">{{msg}}</p>
-      <img [src]="url" alt="task-image" *ngIf="url">
+      <img [hidden]="isImageLoading" (load)="onLoad()" [src]="url" alt="newImage" *ngIf="url">
+      <app-spinner *ngIf="isImageLoading && url"></app-spinner>
     </div>
-    <app-form-button [disabled]="form.invalid" [text]="title"></app-form-button>
+    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Loading...' : title"></app-form-button>
   </form>
 </div>

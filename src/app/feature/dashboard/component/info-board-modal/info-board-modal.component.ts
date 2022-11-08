@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
 import {ModalService} from "../../../../services/modal.service";
 import {IBoard} from "../../../../models/IBoard";
@@ -21,6 +21,9 @@ export class InfoBoardModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
   }
 
   toggleEdit() {

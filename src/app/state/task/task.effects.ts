@@ -52,6 +52,7 @@ export class TaskEffects {
       map((res) => {
         return editTaskSuccess({boardId, task: res.result})}),
       catchError((error : HttpErrorResponse) => {
+        console.log(error)
         return of(boardFailure({error: error.error.message}))
       })
     ))

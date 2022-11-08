@@ -1,8 +1,9 @@
 <div class="user">
   <div class="user__avatar-box">
-    <img [src]="api + user.avatar" class="user__avatar" alt="user-avatar"/>
-    <div class="user__avatar-hover">
-      <p class="material-icons" (click)="modalService.show(modalService.editModalKey)">&#xe439;</p>
+    <img [hidden]="isImageLoaded" (load)="onLoad()" [src]="api + user.avatar" class="user__avatar" alt="user-avatar"/>
+    <app-spinner className="large" *ngIf="isImageLoaded && user.avatar"></app-spinner>
+    <div class="user__avatar-hover" *ngIf="!isImageLoaded && user.avatar">
+      <button class="material-icons" (click)="modalService.show(modalService.editModalKey)">&#xe439;</button>
     </div>
   </div>
   <h2 class="user__username">{{user.username}}</h2>

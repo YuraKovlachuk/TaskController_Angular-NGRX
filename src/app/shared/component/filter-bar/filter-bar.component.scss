@@ -52,14 +52,14 @@ $filter-padding: 7px 14px;
       border-radius: 5px;
       box-sizing: border-box;
       font-family: $font-family;
-      outline: none;
       transition: .2s;
     }
+    
     & select::-ms-expand {
       display: none;
     }
 
-    & select:hover, & select:focus {
+    & select:hover {
       background: $dark-purple;
       cursor: pointer;
     }

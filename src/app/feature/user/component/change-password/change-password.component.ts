@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {authSuccessSelector, passwordErrorSelector} from "../../../../state/auth/auth.selectors";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {authSuccessSelector, isPasswordLoading, passwordErrorSelector} from "../../../../state/auth/auth.selectors";
 import {take} from "rxjs";
 import {clearError} from "../../../../state/auth/auth.actions";
 import {clearSuccessMessage, editPasswordRequest} from "../../../../state/user/user.actions";
@@ -16,6 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   form: FormGroup;
   error$ = this.store.select(passwordErrorSelector)
   success$ = this.store.select(authSuccessSelector)
+  isLoading$ = this.store.select(isPasswordLoading)
   isEditing = false
 
 
@@ -65,6 +66,6 @@ export class ChangePasswordComponent implements OnInit {
         this.store.dispatch(clearSuccessMessage())
         this.store.dispatch(clearError()
         )})
-
+    this.form.reset()
   }
 }

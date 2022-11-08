@@ -1,27 +1,40 @@
 <div class="background"></div>
 <div class="blur" (click)="modalService.hide(modalService.infoModalKey)"></div>
 <div class="modal">
+  <button tabindex="0" class="modal__exit" (click)="modalService.hide(modalService.infoModalKey)"
+          ngInit (onInit)="el.focus()" #el>&#10005;</button>
   <div class="modal__img-box" *ngIf="task.image">
-    <img class="modal__img" [src]="api + task.image" alt="task-image">
-    <div class="modal__img-hover">
-      <label class="material-icons" for="image">&#xe251;</label>
+    <img [hidden]="isImageLoaded" (load)="onLoad()" class="modal__img" [src]="api + task.image" alt="task-image">
+    <app-spinner className="large" *ngIf="isImageLoaded && task.image"></app-spinner>
+    <div class="modal__img-hover" *ngIf="!isImageLoaded && task.image">
+      <button class="modal__img-delete" (click)="deleteTaskImg()">&#10005;</button>
+      <label (keydown.enter)="image.click()" tabindex="0" class="material-icons image-label" for="image" #image>&#xe251;</label>
       <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg, image/gif"
              (change)="uploadImage($event)">
-      <div class="modal__img-delete" (click)="deleteTaskImg()">&#10005;</div>
     </div>
   </div>
   <div class="modal__title-box">
-    <input class="modal__title-input" type="text" *ngIf="isEditing" [value]="task.name"
+    <input class="modal__title-input" type="text" *ngIf="isEditing" [value]="taskName"
            (focusout)="changeName(name.value)"
            (onInit)="name.focus()"
            (keydown)="$event.key === 'Enter' ? changeName(name.value) : ''" ngInit #name/>
-    <h2 class="modal__title" *ngIf="!isEditing" (click)="clickOnTitle()">{{task.name}}
+    <h2 tabindex="0" (focusin)="clickOnTitle()" class="modal__title"
+        *ngIf="!isEditing" (click)="clickOnTitle()">{{taskName}}
       <span *ngIf="task.isArchived">(Archived)</span></h2>
     <div class="modal__title-box-items">
-      <div (click)="archiveTask()" *ngIf="!task.isArchived" class="modal__title-box-archive material-icons" title="Archive task">&#xe149;</div>
-      <div (click)="archiveTask()" *ngIf="task.isArchived" class="modal__title-box-archive material-icons" title="Unarchive task">&#xe169;</div>
-      <div class="modal__title-box-edit" title="Edit task" (click)="toggleEdit()">&#9998;</div>
-      <div class="modal__title-box-delete material-icons" title="Delete task" (click)="deleteTask()">delete</div>
+      <app-spinner className="very-small" *ngIf="isArchiving$ | async"></app-spinner>
+      <button (click)="archiveTask()" *ngIf="!(isArchiving$ | async) && !task.isArchived"
+           class="modal__title-box-archive material-icons" title="Archive task">&#xe149;
+      </button>
+      <button (click)="archiveTask()" *ngIf="!(isArchiving$  | async) && task.isArchived"
+           class="modal__title-box-archive material-icons" title="Unarchive task">&#xe169;
+      </button>
+      <button class="modal__title-box-edit material-icons" title="Edit task" (click)="toggleEdit()">edit</button>
+      <app-spinner className="very-small" *ngIf="isDeleting$ | async"></app-spinner>
+      <button *ngIf="!(isDeleting$ | async)" class="modal__title-box-delete material-icons" title="Delete task"
+           (click)="deleteTask()">
+        delete
+      </button>
     </div>
   </div>
   <div class="modal__info">
@@ -51,10 +64,12 @@
           [control]="comment"
           newHeight="45px"
         ></app-form-input>
+        <button type="submit" class="material-icons">send</button>
       </form>
     </div>
     <div class="modal__activity-comments">
-      <app-task-comment *ngFor="let comment of task.comments" [comment]="comment"
+      <app-spinner className="small" *ngIf="isCommentLoading$ | async"></app-spinner>
+      <app-task-comment *ngFor="let comment of reverseComments()" [comment]="comment"
                         [user]="(user$ | async)!"
                         (delete)="deleteComment($event)"
                         (edit)="editComment($event)"></app-task-comment>

@@ -1,6 +1,10 @@
 @import "src/assets/styles/variable";
 @import "src/app/shared/component/modals/modal";
 
+app-spinner {
+  margin: 0 auto;
+}
+
 .modal {
   &__title {
     color: $text-color;
@@ -35,7 +39,6 @@
       justify-content: center;
       align-items: center;
       transition: .2s;
-      outline: none;
       color: $text-color;
       border-radius: 10px;
       background-color: $blue;

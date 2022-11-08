@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppState} from "../../state/app.state";
 import {Store} from "@ngrx/store";
-import {boardsSelector} from "../../state/board/board.selectors";
+import {boardsLoadingSelector, boardsSelector} from "../../state/board/board.selectors";
 import {deleteBoardRequest, getAllBoardRequest} from "../../state/board/board.actions";
 import {IBoard, IBoardCredentials} from "../../models/IBoard";
 import {ModalService} from "../../services/modal.service";
@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   boards: IBoard[]
   boards$ = this.store.select(boardsSelector)
   boardsSub = this.boards$.subscribe(boards => this.boards = boards)
+  isLoading$ = this.store.select(boardsLoadingSelector)
   selectedBoardId: string
   filters = [{value: 'name', name: 'Board name'}, {value: 'tasks.name', name: 'Task name'}]
   sort = [

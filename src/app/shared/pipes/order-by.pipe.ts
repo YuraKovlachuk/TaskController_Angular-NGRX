@@ -41,7 +41,7 @@ export class OrderByPipe implements PipeTransform {
     });
 
     if (reverse) {
-      return array.reverse();
+      return [...array].reverse();
     }
 
     return array;

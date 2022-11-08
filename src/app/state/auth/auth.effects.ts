@@ -2,7 +2,15 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {debounceTime, from, of} from 'rxjs';
 import {map, mergeMap, catchError} from 'rxjs/operators';
-import {authFailure, clearError, loginRequest, loginSuccess, logout, registerRequest} from "./auth.actions";
+import {
+  authFailure,
+  clearError,
+  loginRequest,
+  loginSuccess,
+  logout,
+  registerRequest,
+  registerSuccess
+} from "./auth.actions";
 import {Store} from "@ngrx/store";
 import {AppState} from "../app.state";
 import {AuthService} from "../../services/auth.service";
@@ -32,7 +40,7 @@ export class AuthEffects {
       .pipe(
         map(() => {
           this.router.navigate(['login'])
-          return clearError()
+          return registerSuccess()
         }),
         catchError(error => of(authFailure({error: error.error.message})))
       ))

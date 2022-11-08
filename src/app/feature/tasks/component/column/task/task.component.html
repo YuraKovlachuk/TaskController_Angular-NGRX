@@ -1,10 +1,16 @@
 <div class="task"
+     tabindex="0"
      [id] = 'task._id'
      (click)="onClick()"
      (dragstart)="dragStart($event)"
      (dragend)="dragEnd($event)"
-     draggable="true">
-  <img class="task__img" [src]="api + task.image" alt="task-img" *ngIf="task.image" draggable="false">
+     draggable="true"
+     (keyup.enter)="taskEl.click()"
+      #taskEl>
+  <img [hidden]="isImageLoaded" (load)="onLoad()"
+       class="task__img" height="145" [src]="api + task.image"
+       alt="task-img" *ngIf="task.image" draggable="false">
+  <app-spinner *ngIf="isImageLoaded && task.image"></app-spinner>
   <div class="task__info">
     <h3 class="task__name">{{task.name}}</h3>
     <app-menu (delete)="deleteTask()"

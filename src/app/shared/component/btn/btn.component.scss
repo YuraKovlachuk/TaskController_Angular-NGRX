@@ -11,9 +11,9 @@ button {
   justify-content: center;
   align-items: center;
   transition: .2s;
-  outline: none;
   color: $text-color;
   border-radius: 10px;
+  background: $main-purple-color;
 }
 
 .submit {

@@ -8,7 +8,7 @@ import {ITask} from "../../../../models/ITask";
 import {environment} from "../../../../../environments/environment";
 import {deleteTaskImgRequest, editTaskRequest, editTaskSuccess} from "../../../../state/task/task.actions";
 import {ofType} from "@ngrx/effects";
-import {boardsErrorSelector} from "../../../../state/board/board.selectors";
+import {boardsErrorSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
 import {clearError} from "../../../../state/board/board.actions";
 
 @Component({
@@ -23,7 +23,9 @@ export class EditTaskModalComponent implements OnInit {
 
   form: FormGroup
   error$ = this.store.select(boardsErrorSelector)
+  isLoading$ = this.store.select(isLoadingBoard)
   isSuccess: Subscription
+  isImageLoaded = true
 
   url: string | ArrayBuffer | null;
   msg = "";
@@ -47,11 +49,11 @@ export class EditTaskModalComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.modalService.hide(this.modalService.createModalKey);
+      this.modalService.hide(this.modalService.editModalKey);
     }
-    if (event.key === 'Enter') {
-      this.editTask()
-    }
+    // if (event.key === 'Enter') {
+    //   this.editTask()
+    // }
   }
 
   get name() {
@@ -70,6 +72,9 @@ export class EditTaskModalComponent implements OnInit {
     return this.form.controls['fileSource'] as FormControl;
   }
 
+  onLoad() {
+    this.isImageLoaded = false;
+  }
 
   private _createForm() {
     this.form = new FormGroup({
@@ -132,6 +137,12 @@ export class EditTaskModalComponent implements OnInit {
       this.msg = "Only images(png/jpeg/jpg/gif) are supported";
       return;
     }
+    let fileSizeKB = Math.round(event.target.files[0].size / 1024)
+    const optimalSize = 1024 * 4
+    if(fileSizeKB > optimalSize) {
+      this.msg = 'The size of img must be less than 4mb'
+      return;
+    }
     const file = event.target.files[0];
     this.url = event.target.files[0]
     this.form.patchValue({
@@ -148,6 +159,7 @@ export class EditTaskModalComponent implements OnInit {
       // // need to run CD since file load runs outside of zone
       // this.cd.markForCheck();
     }
+    event.target.value = ''
   }
 
 

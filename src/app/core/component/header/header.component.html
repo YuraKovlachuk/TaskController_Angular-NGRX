@@ -16,7 +16,8 @@
         <li><a [routerLink]="['/about']" [routerLinkActive]="'active-head-link'" class="header__pages-link">About</a></li>
       </ul>
       <div class="header__profile">
-        <img [routerLink]="['/about']" class="header__profile-photo" [src]="api + user.avatar" alt="avatar">
+        <img (keydown.enter)="avatar.click()" [routerLink]="['/about']"
+             class="header__profile-photo" [src]="api + user.avatar" alt="avatar" #avatar>
         <header-dropdown [title]="user.username"></header-dropdown>
       </div>
     </ng-container>

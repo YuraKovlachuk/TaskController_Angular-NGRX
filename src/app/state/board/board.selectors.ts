@@ -9,10 +9,47 @@ export const boardsSelector = createSelector(
   boardSelect,
   (state: BoardState) => state.boards
 )
+
 export const boardsErrorSelector = createSelector(
   boardSelect,
   (state: BoardState) => state.error
 )
+
+export const boardsLoadingSelector = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isBoardLoading
+)
+
+export const isLoadingBoard = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isLoading
+)
+
+export const isDeleting = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isDeleting
+)
+
+export const isCommentLoading = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isCommentLoading
+)
+
+export const isArchiving = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isArchiving
+)
+
+export const isCommentDeleting = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isCommentDeleting
+)
+
+export const tasksLoadingSelector = createSelector(
+  boardSelect,
+  (state: BoardState) => state.isTaskLoading
+)
+
 export const boardSelectById = (id: string) =>
   createSelector(
   boardSelect,
@@ -20,6 +57,7 @@ export const boardSelectById = (id: string) =>
     return state.boards.find(board => board._id === id) as IBoard
   }
 )
+
 export const taskSelectById = createSelector(
   boardSelect,
   (state: BoardState) => {

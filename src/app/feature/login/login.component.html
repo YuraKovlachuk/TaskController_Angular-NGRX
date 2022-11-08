@@ -25,7 +25,7 @@
                       [control]="password"
                       [controlName]="'password'"
       ></app-form-input>
-      <app-form-button [disabled]="form.invalid" [text]="'Sign in'"></app-form-button>
+      <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Loading...' : 'Sign in'"></app-form-button>
       <span class="login__form-error">
             {{(error$ | async) || '&nbsp;'}}
         </span>

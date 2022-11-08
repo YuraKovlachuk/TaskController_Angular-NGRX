@@ -21,6 +21,10 @@
     object-fit: contain;
   }
 
+  app-spinner {
+    margin-bottom: 10px;
+  }
+
   //&__img {
   //  width: 100%;
   //  border-radius: 5px;
@@ -56,10 +60,5 @@
   opacity: .2;
   cursor: grabbing;
   //display: none;
-}
-
-.dragging {
-  transform: rotate(30deg);
-  opacity: 1;
 }
 

@@ -9,6 +9,9 @@
     width: 150px;
     height: 150px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__avatar {
@@ -35,8 +38,16 @@
       opacity: 0.6;
     }
 
-    &-hover p {
+    &-hover:focus-within {
+      opacity: 0.6;
+    }
+
+    &-hover button {
       margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      color: $text-color;
       font-size: 40px;
       position: absolute;
       top: 50%;
@@ -44,7 +55,7 @@
       transform: translate(-50%, -50%);
     }
 
-    &-hover p:hover {
+    &-hover button:hover {
       cursor: pointer;
       color: white
     }

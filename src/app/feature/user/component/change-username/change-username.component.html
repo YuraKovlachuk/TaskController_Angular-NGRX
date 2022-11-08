@@ -1,4 +1,4 @@
-<div class="change-main" (click)="isEditing = !isEditing">
+<div class="change-main" (click)="isEditing = !isEditing" tabindex="0" (keydown.enter)="el.click()" #el>
   <p class="change-main-title">Change username</p>
   <span class="change-main-arrow" [ngClass]="isEditing ? 'close' : 'open'">&#8249;</span>
 </div>
@@ -14,6 +14,7 @@
                     [withError]="true"
                     newHeight="40px"
     ></app-form-input>
-    <app-form-button [newHeight]="'40px'" [disabled]="form.invalid" [text]="'Change username'"></app-form-button>
+    <app-form-button [newHeight]="'40px'" [disabled]="form.invalid"
+                     [text]="(isLoading$ | async) ? 'Loading...' : 'Change username'"></app-form-button>
   </form>
 </div>

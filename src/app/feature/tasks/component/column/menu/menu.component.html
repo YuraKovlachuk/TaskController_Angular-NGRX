@@ -3,9 +3,12 @@
   <div class="fixed">
     <div class="menu">
       <div tabindex="0" class="menu-item" (click)="edit.emit()">Edit</div>
-      <div tabindex="0" class="menu-item" (click)="delete.emit()">Delete</div>
-      <div tabindex="0" class="menu-item" *ngIf="!isArchived" (click)="archive.emit()">Archive</div>
-      <div tabindex="0" class="menu-item" *ngIf="isArchived" (click)="archive.emit()">Unarchive</div>
+      <div tabindex="0" class="menu-item" (click)="delete.emit()">
+        {{(isDeleting$ | async) ? 'Loading...' : 'Delete' }}</div>
+      <div tabindex="0" class="menu-item" *ngIf="!isArchived" (click)="archive.emit()">
+        {{(isArchiving$ | async) ? 'Archiving...' : 'Archive' }}</div>
+      <div tabindex="0" class="menu-item" *ngIf="isArchived" (click)="archive.emit()">
+        {{(isArchiving$ | async) ? 'Unarchiving...' : 'Unarchive' }}</div>
     </div>
   </div>
 </div>

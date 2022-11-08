@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {IBoard} from "../../../../models/IBoard";
 import {ModalService} from "../../../../services/modal.service";
 
@@ -15,6 +15,7 @@ export class BoardComponent implements OnInit {
   constructor(
     private svgImageRef: ElementRef<HTMLDivElement>,
     public modalService: ModalService) { }
+
 
   ngOnInit(): void {
   }

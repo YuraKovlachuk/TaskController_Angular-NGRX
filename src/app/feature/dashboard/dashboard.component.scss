@@ -7,3 +7,7 @@
   flex-wrap: wrap;
   gap: calc(($container-width - $board-width * 4) / 3);
 }
+
+app-spinner {
+  margin: 0 auto;
+}

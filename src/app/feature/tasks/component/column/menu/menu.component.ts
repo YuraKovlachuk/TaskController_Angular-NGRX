@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalService} from "../../../../../services/modal.service";
+import {isArchiving, isDeleting, isLoadingBoard} from "../../../../../state/board/board.selectors";
+import {AppState} from "../../../../../state/app.state";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +14,12 @@ export class MenuComponent implements OnInit {
   @Output() edit = new EventEmitter()
   @Output() archive = new EventEmitter<boolean>()
 
+  isDeleting$ = this.store.select(isDeleting)
+  isArchiving$ = this.store.select(isArchiving)
+
   @Input() isArchived: boolean
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {

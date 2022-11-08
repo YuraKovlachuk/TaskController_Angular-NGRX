@@ -21,7 +21,22 @@ export const usernameErrorSelector = createSelector(
   (state: AuthState) => state.usernameError
 )
 
+export const isUsernameLoading = createSelector(
+  authSelect,
+  (state: AuthState) => state.isUsernameLoading
+)
+
+export const isPasswordLoading = createSelector(
+  authSelect,
+  (state: AuthState) => state.isPasswordLoading
+)
+
 export const passwordErrorSelector = createSelector(
   authSelect,
   (state: AuthState) => state.passwordError
+)
+
+export const isLoadingAuth = createSelector(
+  authSelect,
+  (state: AuthState) => state.isLoading
 )

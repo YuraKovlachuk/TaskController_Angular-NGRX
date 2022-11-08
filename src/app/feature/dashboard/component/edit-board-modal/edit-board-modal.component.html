@@ -1,6 +1,8 @@
 <div class="background" (click)="modalService.hide(modalService.editModalKey)"></div>
 <div class="blur" (click)="modalService.hide(modalService.editModalKey)"></div>
 <div class="modal">
+  <button tabindex="0" class="modal__exit" (click)="modalService.hide(modalService.editModalKey)"
+          ngInit (onInit)="el.focus()" #el>&#10005;</button>
   <h2 class="modal__title">{{title}}</h2>
   <form class="modal__form" [formGroup]="form" (ngSubmit)="editBoard()">
     <app-form-input [label]="'Enter board name'"
@@ -11,6 +13,7 @@
                     [controlName]="'name'"
                     [error$]="error$"
                     [withError]="true"
+                    [isAutofocus]="true"
     ></app-form-input>
     <div class="modal__form-color">
       <label for="color">Choose the color of board</label>
@@ -23,6 +26,6 @@
         <option value="#ed8d9b">#ed8d9b</option>
       </datalist>
     </div>
-    <app-form-button [disabled]="form.invalid" [text]="title"></app-form-button>
+    <app-form-button [disabled]="form.invalid" [text]="(isLoading$ | async) ? 'Loading...' : title"></app-form-button>
   </form>
 </div>

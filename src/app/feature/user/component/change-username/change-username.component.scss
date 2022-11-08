@@ -1,9 +1,11 @@
+@import "src/assets/styles/variable";
 
 .change-main {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 75px;
+  box-sizing: border-box;
 
   &-title {
     margin: 0;

@@ -1,6 +1,6 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {boardsErrorSelector} from "../../../../state/board/board.selectors";
+import {boardsErrorSelector, boardsLoadingSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
 import {IBoard} from "../../../../models/IBoard";
 import {ModalService} from "../../../../services/modal.service";
 import {ActionsSubject, Store} from "@ngrx/store";
@@ -19,6 +19,7 @@ export class EditBoardModalComponent implements OnInit {
   @Input() board: IBoard;
   form: FormGroup;
   error$ = this.store.select(boardsErrorSelector)
+  isLoading$ = this.store.select(isLoadingBoard)
   isSuccess: Subscription
 
   constructor(

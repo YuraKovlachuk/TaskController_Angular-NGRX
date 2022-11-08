@@ -24,10 +24,17 @@ export class FormInputComponent implements OnInit {
   @Input() withError: boolean
   @Input() defaultValue?: string
   @Input() newHeight: string
+  @Input() isAutofocus: boolean
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  focus(input: HTMLInputElement) {
+    if(this.isAutofocus) {
+      input.focus()
+    }
   }
 
 

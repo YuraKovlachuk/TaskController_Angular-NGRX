@@ -10,6 +10,8 @@ import {BtnComponent} from "./component/btn/btn.component";
 import {FilterPipe} from "./pipes/filter.pipe";
 import {OrderByPipe} from "./pipes/order-by.pipe";
 import { NgInitDirective } from './directives/ng-init.directive';
+import { FocusedDirective } from './directives/focused.directive';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NgInitDirective } from './directives/ng-init.directive';
     BtnComponent,
     FilterPipe,
     OrderByPipe,
-    NgInitDirective
+    NgInitDirective,
+    FocusedDirective,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -28,14 +32,17 @@ import { NgInitDirective } from './directives/ng-init.directive';
     FormsModule
   ],
   providers: [ModalService],
-  exports: [
-    FilterBarComponent,
-    DropdownDirective,
-    FormButtonComponent,
-    FormInputComponent,
-    BtnComponent,
-    FilterPipe,
-    OrderByPipe,
-    NgInitDirective]
+    exports: [
+        FilterBarComponent,
+        DropdownDirective,
+        FormButtonComponent,
+        FormInputComponent,
+        BtnComponent,
+        FilterPipe,
+        OrderByPipe,
+        NgInitDirective,
+        FocusedDirective,
+        SpinnerComponent
+    ]
 })
 export class SharedModule { }

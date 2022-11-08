@@ -10,6 +10,7 @@ import {
   setTaskID
 } from "../../../../../state/task/task.actions";
 import {ModalService} from "../../../../../services/modal.service";
+import {isDeleting} from "../../../../../state/board/board.selectors";
 
 @Component({
   selector: 'app-task',
@@ -20,6 +21,9 @@ export class TaskComponent implements OnInit {
   @Input() task: ITask
   api = environment.URL;
 
+
+  isImageLoaded = true
+
   constructor(
     public modalService: ModalService,
     private store: Store<AppState>) { }
@@ -27,7 +31,8 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(): void {
+  onLoad() {
+    this.isImageLoaded = false;
   }
 
   dragStart(e: any) {

@@ -12,9 +12,15 @@ export class UserInfoComponent implements OnInit {
   @Input() user: IUser
   api = environment.URL;
 
+  isImageLoaded = true;
+
   constructor(public modalService: ModalService) { }
 
   ngOnInit(): void {
+  }
+
+  onLoad() {
+    this.isImageLoaded = false;
   }
 
 }

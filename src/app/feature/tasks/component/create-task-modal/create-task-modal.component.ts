@@ -7,7 +7,7 @@ import {TaskService} from "../../../../services/task.service";
 import {Subscription, take} from "rxjs";
 import {ofType} from "@ngrx/effects";
 import {addTaskRequest, addTaskSuccess} from "../../../../state/task/task.actions";
-import {boardsErrorSelector} from "../../../../state/board/board.selectors";
+import {boardsErrorSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
 import {clearError} from "../../../../state/board/board.actions";
 
 @Component({
@@ -21,7 +21,9 @@ export class CreateTaskModalComponent implements OnInit {
 
   form: FormGroup
   error$ = this.store.select(boardsErrorSelector)
+  isLoading$ = this.store.select(isLoadingBoard)
   isSuccess: Subscription
+  isImageLoading = true
 
   url: string | ArrayBuffer | null;
   msg = "";
@@ -52,9 +54,9 @@ export class CreateTaskModalComponent implements OnInit {
     if (event.key === 'Escape') {
       this.modalService.hide(this.modalService.createModalKey);
     }
-    if (event.key === 'Enter') {
-      this.addTask()
-    }
+    // if (event.key === 'Enter') {
+    //   this.addTask()
+    // }
   }
 
   get name() {
@@ -73,6 +75,9 @@ export class CreateTaskModalComponent implements OnInit {
     return this.form.controls['fileSource'] as FormControl;
   }
 
+  onLoad() {
+    this.isImageLoading = false;
+  }
 
   private _createForm() {
     this.form = new FormGroup({
@@ -97,8 +102,6 @@ export class CreateTaskModalComponent implements OnInit {
     formData.append('image', this.form.get('fileSource')?.value);
     formData.append('status', this.status);
 
-    console.log('here')
-
     this.store.dispatch(addTaskRequest({boardId: this.boardId, data: formData}))
     this.form.reset();
     this.form.valueChanges.pipe(take(1))
@@ -121,6 +124,12 @@ export class CreateTaskModalComponent implements OnInit {
       this.msg = "Only images(png/jpeg/jpg/gif) are supported";
       return;
     }
+    let fileSizeKB = Math.round(event.target.files[0].size / 1024)
+    const optimalSize = 1024 * 4
+    if(fileSizeKB > optimalSize) {
+      this.msg = 'The size of img must be less than 4mb'
+      return;
+    }
     const file = event.target.files[0];
     this.url = event.target.files[0]
     this.form.patchValue({
@@ -138,6 +147,7 @@ export class CreateTaskModalComponent implements OnInit {
       // // need to run CD since file load runs outside of zone
       // this.cd.markForCheck();
     }
+    event.target.value = ''
   }
 
 }

@@ -3,6 +3,7 @@
   <input [formControlName]="controlName" [type]="type" [id]="name" [autocomplete]="name" [name]="name"
          [placeholder]="placeholder" [value]="defaultValue"
          [class.border-error]="control.invalid && control.dirty || (error$ | async)" [ngStyle]="{height:newHeight}"
+         ngInit (onInit)="focus(input)" #input
   >
 </div>
 <p class="error" *ngIf="withError">{{(error$ | async) || '&nbsp;'}}</p>

@@ -16,6 +16,10 @@ export const registerRequest = createAction(
   props<{credential: Credentials}>()
 )
 
+export const registerSuccess = createAction(
+  '[Auth] Register Success'
+)
+
 export const authFailure = createAction(
   '[Auth] Login Failure',
   props<{error: string}>()

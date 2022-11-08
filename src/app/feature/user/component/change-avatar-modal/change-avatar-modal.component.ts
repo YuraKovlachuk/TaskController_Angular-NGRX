@@ -22,6 +22,8 @@ export class ChangeAvatarModalComponent implements OnInit {
   file: any;
   msg = "";
 
+  isImageLoaded = true;
+
   constructor(
     public modalService: ModalService,
     private store: Store<AppState>) { }
@@ -48,6 +50,10 @@ export class ChangeAvatarModalComponent implements OnInit {
     this.url = this.api + this.defaultAvatar
   }
 
+  onLoad() {
+    this.isImageLoaded = false;
+  }
+
   selectFile(event: any) {
     this.store.dispatch(clearError())
     if(!event.target.files[0] || event.target.files[0].length == 0) {
@@ -59,6 +65,12 @@ export class ChangeAvatarModalComponent implements OnInit {
       mimeType !== 'image/jpg' &&
       mimeType !== 'image/jpeg') {
       this.msg = "Only images(png/jpeg/jpg) are supported";
+      return;
+    }
+    let fileSizeKB = Math.round(event.target.files[0].size / 1024)
+    const optimalSize = 1024 * 2
+    if(fileSizeKB > optimalSize) {
+      this.msg = 'The size of img must be less than 2mb'
       return;
     }
     this.file = event.target.files[0];
