@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, Input, OnInit} from '@angular/core';
 import {ModalService} from "../../../../services/modal.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ITask} from "../../../../models/ITask";
@@ -21,7 +21,8 @@ import {isArchiving, isCommentLoading, isDeleting, isLoadingBoard} from "../../.
 @Component({
   selector: 'app-info-task-modal',
   templateUrl: './info-task-modal.component.html',
-  styleUrls: ['./info-task-modal.component.scss']
+  styleUrls: ['./info-task-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoTaskModalComponent implements OnInit {
   @Input() task: ITask

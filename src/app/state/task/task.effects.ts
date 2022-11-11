@@ -25,7 +25,7 @@ export class TaskEffects {
   addTask$ = createEffect(() => this.actions$.pipe(
     ofType(addTaskRequest),
     mergeMap(({boardId, data}) => this.taskService.addTask(boardId, data).pipe(
-      map((res) => addTaskSuccess({boardId , task: res as ITask})),
+      map((res) => addTaskSuccess({boardId , task: res})),
       catchError((error : HttpErrorResponse) => {
         return of(boardFailure({error: error.error.message}))
       })

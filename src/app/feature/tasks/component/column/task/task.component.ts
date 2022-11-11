@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {ITask} from "../../../../../models/ITask";
 import {environment} from "../../../../../../environments/environment";
 import {Store} from "@ngrx/store";
@@ -15,7 +15,8 @@ import {isDeleting} from "../../../../../state/board/board.selectors";
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskComponent implements OnInit {
   @Input() task: ITask

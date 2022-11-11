@@ -216,6 +216,43 @@ export const boardReducers = createReducer(
       boards: editedBoards
     }
   }),
+  // on(editTaskRequest, (state, {boardId, data}) => {
+  //   let editedBoards: IBoard[] = [...state.boards];
+  //   let newStatus = data.get('status') as 'TODO' | 'PROGRESS' | 'DONE'
+  //   if(!newStatus) {
+  //     return {
+  //       ...state,
+  //     } }
+  //   editedBoards.find((board, i) => {
+  //     if (board._id === boardId) {
+  //       const editedTasks = [...board.tasks]
+  //
+  //       board.tasks.find((itemTask, j) => {
+  //         if (itemTask._id === state.selectedTaskId) {
+  //           //---change count of task by status
+  //           let task_count = {...editedBoards[i].tasks_count}
+  //           task_count[itemTask.status.toLowerCase() as keyof typeof board.tasks_count] -= 1
+  //           task_count[newStatus as keyof typeof board.tasks_count] += 1
+  //           editedBoards[i] = {...editedBoards[i], tasks_count: {...task_count}}
+  //           //--------
+  //           editedTasks[j] = {...editedTasks[j], status: newStatus}
+  //
+  //           return true
+  //         }
+  //         return false
+  //       })
+  //
+  //       editedBoards[i] = {...editedBoards[i], tasks: editedTasks}
+  //       return true
+  //     }
+  //     return false
+  //   })
+  //
+  //   return {
+  //     ...state,
+  //     boards: editedBoards
+  //   }
+  // }),
   on(editTaskSuccess, (state, {boardId, task}) => {
     let editedBoards: IBoard[] = [...state.boards];
     editedBoards.find((board, i) => {

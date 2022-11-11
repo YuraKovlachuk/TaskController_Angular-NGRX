@@ -15,7 +15,7 @@ export class TaskService {
   }
 
   addTask(boardId: string, data: FormData) {
-    return this.http.post(`${urls.task}/${boardId}/tasks/`, data, {
+    return this.http.post<ITask>(`${urls.task}/${boardId}/tasks/`, data, {
       withCredentials: true
     })
   }

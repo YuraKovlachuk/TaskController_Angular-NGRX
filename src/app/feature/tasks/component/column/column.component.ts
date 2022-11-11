@@ -1,13 +1,18 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ITask} from "../../../../models/ITask";
 import {ModalService} from "../../../../services/modal.service";
 import {TaskService} from "../../../../services/task.service";
 import {FilterService} from "../../../../services/filter.service";
-import {boardsLoadingSelector, taskSelectById, tasksLoadingSelector} from "../../../../state/board/board.selectors";
-import {Store} from "@ngrx/store";
+import {
+  boardSelect, boardSelectById,
+  boardsLoadingSelector,
+  taskSelectById,
+  tasksLoadingSelector
+} from "../../../../state/board/board.selectors";
+import {Selector, Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {editTaskRequest} from "../../../../state/task/task.actions";
-import {debounceTime, distinctUntilChanged, fromEvent, Subscription} from "rxjs";
+import {debounceTime, distinctUntilChanged, fromEvent, Observable, Subscription} from "rxjs";
 import {map} from "rxjs/operators";
 import {editBoardRequest, editColumnColorRequest} from "../../../../state/board/board.actions";
 import {IBoard} from "../../../../models/IBoard";
@@ -15,7 +20,8 @@ import {IBoard} from "../../../../models/IBoard";
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
-  styleUrls: ['./column.component.scss']
+  styleUrls: ['./column.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnComponent implements OnInit {
   @Input() boardId: string
@@ -70,9 +76,5 @@ export class ColumnComponent implements OnInit {
   onClick() {
     this.modalService.show(this.modalService.createModalKey)
     this.taskService.status.next(this.name.toUpperCase())
-  }
-
-  onChangeColor() {
-
   }
 }
