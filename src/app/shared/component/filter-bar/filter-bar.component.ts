@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FilterService} from "../../../services/filter.service";
 import {debounceTime, distinctUntilChanged, fromEvent, Subscription} from "rxjs";
 import {map} from "rxjs/operators";

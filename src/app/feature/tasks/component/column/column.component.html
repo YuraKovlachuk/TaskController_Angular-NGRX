@@ -6,15 +6,15 @@
   <div class="column__title-box">
     <h2 class="column__title">{{name}}</h2>
     <div class="column__color-box">
-      <input type="color" tabindex="-1" [name]="inputColor" [id]="inputColor" #colorInput>
-<!--      <datalist id="columnColors">-->
-<!--        <option value="#242948">#242948</option>-->
-<!--        <option value="#6356E5">#6356E5</option>-->
-<!--        <option value="#fe7f2e">#fe7f2e</option>-->
-<!--        <option value="#1da7ff">#1da7ff</option>-->
-<!--        <option value="#0ace82">#0ace82</option>-->
-<!--        <option value="#ed8d9b">#ed8d9b</option>-->
-<!--      </datalist>-->
+      <input type="color" tabindex="-1" [name]="inputColor" [id]="inputColor" #colorInput list="columnColors">
+      <datalist id="columnColors">
+        <option value="#242948">#242948</option>
+        <option value="#6356E5">#6356E5</option>
+        <option value="#fe7f2e">#fe7f2e</option>
+        <option value="#1da7ff">#1da7ff</option>
+        <option value="#0ace82">#0ace82</option>
+        <option value="#ed8d9b">#ed8d9b</option>
+      </datalist>
       <label [for]="inputColor" class="column__color material-icons"
              (keydown.enter)="colorLabel.click()" tabindex="0" #colorLabel>&#xe3b7;</label>
     </div>

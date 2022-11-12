@@ -1,0 +1,29 @@
+@import "../../../../assets/styles/variable";
+
+.error-box {
+  background-color: #790606;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 25px;
+  position: relative;
+}
+
+.error-text {
+  font-family: $font-family;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.error-btn {
+  position: absolute;
+  color: white;
+  font-family: $font-family;
+  right: 1rem;
+  margin: auto 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.5rem;
+}

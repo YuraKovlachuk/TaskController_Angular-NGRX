@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {IBoard} from "../../models/IBoard";
 
 @Pipe({
   name: 'filter'

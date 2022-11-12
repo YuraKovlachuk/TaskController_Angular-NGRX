@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AppState} from "../../../../state/app.state";
 import {Store} from "@ngrx/store";
 import {logout} from "../../../../state/auth/auth.actions";

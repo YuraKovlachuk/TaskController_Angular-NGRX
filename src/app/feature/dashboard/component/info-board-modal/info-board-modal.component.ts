@@ -1,5 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {animate, style, transition, trigger} from "@angular/animations";
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ModalService} from "../../../../services/modal.service";
 import {IBoard} from "../../../../models/IBoard";
 

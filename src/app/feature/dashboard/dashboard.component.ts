@@ -3,7 +3,7 @@ import {AppState} from "../../state/app.state";
 import {Store} from "@ngrx/store";
 import {boardsLoadingSelector, boardsSelector} from "../../state/board/board.selectors";
 import {deleteBoardRequest, getAllBoardRequest} from "../../state/board/board.actions";
-import {IBoard, IBoardCredentials} from "../../models/IBoard";
+import {IBoard} from "../../models/IBoard";
 import {ModalService} from "../../services/modal.service";
 import {FilterService} from "../../services/filter.service";
 

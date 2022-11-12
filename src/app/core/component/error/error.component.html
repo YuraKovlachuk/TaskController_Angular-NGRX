@@ -1,0 +1,6 @@
+<div
+  *ngIf="error$ | async"
+  class="error-box">
+  <p class="error-text">{{error$ | async}}</p>
+  <button type="button" class="error-btn" (click)="closeError()">&times;</button>
+</div>

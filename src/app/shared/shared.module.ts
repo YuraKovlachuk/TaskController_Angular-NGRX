@@ -24,7 +24,7 @@ import { SpinnerComponent } from './component/spinner/spinner.component';
     OrderByPipe,
     NgInitDirective,
     FocusedDirective,
-    SpinnerComponent
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,

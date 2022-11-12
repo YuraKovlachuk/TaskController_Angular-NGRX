@@ -58,6 +58,11 @@ export const boardSelectById = (id: string) =>
   }
 )
 
+export const getAllBoardsError = createSelector(
+  boardSelect,
+  (state: BoardState) => state.getAllBoardsError
+)
+
 export const taskSelectById = createSelector(
   boardSelect,
   (state: BoardState) => {

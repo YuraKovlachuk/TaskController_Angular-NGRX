@@ -13,9 +13,7 @@ import {
   deleteTaskImgRequest, deleteTaskImgSuccess,
   deleteTaskRequest,
   deleteTaskSuccess, editTaskCommentRequest, editTaskCommentSuccess, editTaskRequest, editTaskSuccess,
-  taskFailure
 } from "./task.actions";
-import {ITask} from "../../models/ITask";
 import {HttpErrorResponse} from "@angular/common/http";
 import {boardFailure} from "../board/board.actions";
 
@@ -49,10 +47,8 @@ export class TaskEffects {
   editTask$ = createEffect(()=> this.actions$.pipe(
     ofType(editTaskRequest),
     mergeMap(({boardId, taskId, data}) => this.taskService.editTask(boardId, taskId, data).pipe(
-      map((res) => {
-        return editTaskSuccess({boardId, task: res.result})}),
+      map((res) => editTaskSuccess({boardId, task: res.result})),
       catchError((error : HttpErrorResponse) => {
-        console.log(error)
         return of(boardFailure({error: error.error.message}))
       })
     ))

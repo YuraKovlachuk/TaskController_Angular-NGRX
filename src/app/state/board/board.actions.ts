@@ -64,3 +64,8 @@ export const setBoardId = createAction(
   '[Board] Set board id',
   props<{ boardId: string }>()
 )
+
+export const handleError = createAction(
+  '[Board] Handle error get all boards',
+  props<{message: string}>()
+)

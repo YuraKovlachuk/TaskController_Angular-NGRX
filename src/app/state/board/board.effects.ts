@@ -5,7 +5,7 @@ import {AppState} from "../app.state";
 import {
   addBoardRequest,
   addBoardSuccess,
-  boardFailure,
+  boardFailure, clearError,
   deleteBoardRequest,
   deleteBoardSuccess,
   editBoardRequest,
@@ -13,7 +13,7 @@ import {
   editColumnColorRequest,
   editColumnColorSuccess,
   getAllBoardRequest,
-  getAllBoardSuccess
+  getAllBoardSuccess, handleError
 } from "./board.actions";
 import { mergeMap, of} from "rxjs";
 import {BoardService} from "../../services/board.service";
@@ -26,7 +26,11 @@ export class BoardEffects {
   allBoards$ = createEffect(() => this.actions$.pipe(
     ofType(getAllBoardRequest),
     mergeMap(() => this.boardService.getAllBoards().pipe(
-      map((res) => getAllBoardSuccess({boards: res.boards}))
+      map((res) => getAllBoardSuccess({boards: res.boards})),
+      catchError((error : HttpErrorResponse) => {
+        if(error.status === 401) { return of(clearError())}
+        return of(handleError({message: error.error.message || error.message}))
+      })
     ))
   ))
 

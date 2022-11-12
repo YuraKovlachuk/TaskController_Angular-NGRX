@@ -3,9 +3,9 @@ import {ModalService} from "../../../../services/modal.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActionsSubject, Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
-import {addBoardRequest, addBoardSuccess, clearError, editBoardSuccess} from "../../../../state/board/board.actions";
+import {addBoardRequest, addBoardSuccess, clearError} from "../../../../state/board/board.actions";
 import {boardsErrorSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
-import {Subscription, take, takeUntil} from "rxjs";
+import {Subscription, take} from "rxjs";
 import {ofType} from "@ngrx/effects";
 
 @Component({

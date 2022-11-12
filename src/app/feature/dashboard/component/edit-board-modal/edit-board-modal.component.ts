@@ -1,12 +1,12 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {boardsErrorSelector, boardsLoadingSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
+import {boardsErrorSelector, isLoadingBoard} from "../../../../state/board/board.selectors";
 import {IBoard} from "../../../../models/IBoard";
 import {ModalService} from "../../../../services/modal.service";
 import {ActionsSubject, Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
-import {boardFailure, clearError, editBoardRequest, editBoardSuccess} from "../../../../state/board/board.actions";
-import {delay, Subscription, take} from "rxjs";
+import {clearError, editBoardRequest, editBoardSuccess} from "../../../../state/board/board.actions";
+import {Subscription, take} from "rxjs";
 import {ofType} from "@ngrx/effects";
 
 @Component({

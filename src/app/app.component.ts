@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {getAllBoardRequest} from "./state/board/board.actions";
 import {Store} from "@ngrx/store";
 import {AppState} from "./state/app.state";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',

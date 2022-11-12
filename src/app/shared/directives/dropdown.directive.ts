@@ -1,4 +1,4 @@
-import {Directive, HostBinding, HostListener} from '@angular/core';
+import {Directive} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {
   ElementRef,

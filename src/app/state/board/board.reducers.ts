@@ -6,7 +6,7 @@ import {
   boardFailure,
   clearError,
   deleteBoardSuccess, editBoardRequest, editBoardSuccess, editColumnColorSuccess, getAllBoardRequest,
-  getAllBoardSuccess, setBoardId
+  getAllBoardSuccess, handleError, setBoardId
 } from "./board.actions";
 import {
   addTaskCommentRequest,
@@ -32,6 +32,7 @@ export interface BoardState {
   isCommentLoading: boolean
   isCommentDeleting: boolean
   isArchiving: boolean
+  getAllBoardsError: string
 }
 
 export const initialState: BoardState = {
@@ -45,7 +46,8 @@ export const initialState: BoardState = {
   isDeleting: false,
   isCommentLoading: false,
   isCommentDeleting: false,
-  isArchiving: false
+  isArchiving: false,
+  getAllBoardsError: ''
 };
 
 export const boardReducers = createReducer(
@@ -85,7 +87,8 @@ export const boardReducers = createReducer(
   })),
   on(clearError, (state) => ({
     ...state,
-    error: ''
+    error: '',
+    getAllBoardsError: ''
   })),
   on(editBoardSuccess, (state, {board}) => {
     const editedBoards = [...state.boards];
@@ -122,6 +125,11 @@ export const boardReducers = createReducer(
     ...state,
     selectedBoardId: boardId
   })),
+  on(handleError, (state, {message}) => ({
+    ...state,
+    getAllBoardsError: message,
+    isBoardLoading: false
+  })),
 
 
   // -----------------------------Tasks Actions----------------------------------------
@@ -135,7 +143,7 @@ export const boardReducers = createReducer(
     ...state,
     isDeleting: true
   })),
-  on(archiveTaskRequest , (state) => ({
+  on(archiveTaskRequest, (state) => ({
     ...state,
     isArchiving: true
   })),
@@ -216,59 +224,27 @@ export const boardReducers = createReducer(
       boards: editedBoards
     }
   }),
-  // on(editTaskRequest, (state, {boardId, data}) => {
-  //   let editedBoards: IBoard[] = [...state.boards];
-  //   let newStatus = data.get('status') as 'TODO' | 'PROGRESS' | 'DONE'
-  //   if(!newStatus) {
-  //     return {
-  //       ...state,
-  //     } }
-  //   editedBoards.find((board, i) => {
-  //     if (board._id === boardId) {
-  //       const editedTasks = [...board.tasks]
-  //
-  //       board.tasks.find((itemTask, j) => {
-  //         if (itemTask._id === state.selectedTaskId) {
-  //           //---change count of task by status
-  //           let task_count = {...editedBoards[i].tasks_count}
-  //           task_count[itemTask.status.toLowerCase() as keyof typeof board.tasks_count] -= 1
-  //           task_count[newStatus as keyof typeof board.tasks_count] += 1
-  //           editedBoards[i] = {...editedBoards[i], tasks_count: {...task_count}}
-  //           //--------
-  //           editedTasks[j] = {...editedTasks[j], status: newStatus}
-  //
-  //           return true
-  //         }
-  //         return false
-  //       })
-  //
-  //       editedBoards[i] = {...editedBoards[i], tasks: editedTasks}
-  //       return true
-  //     }
-  //     return false
-  //   })
-  //
-  //   return {
-  //     ...state,
-  //     boards: editedBoards
-  //   }
-  // }),
-  on(editTaskSuccess, (state, {boardId, task}) => {
+  on(editTaskRequest, (state, {boardId, data, taskId}) => {
     let editedBoards: IBoard[] = [...state.boards];
+    let newStatus = data.get('status') as 'TODO' | 'PROGRESS' | 'DONE'
+    if (!newStatus) {
+      return {
+        ...state
+      }
+    }
     editedBoards.find((board, i) => {
       if (board._id === boardId) {
         const editedTasks = [...board.tasks]
 
         board.tasks.find((itemTask, j) => {
-          if (itemTask._id === state.selectedTaskId) {
+          if (itemTask._id === taskId) {
+            editedTasks[j] = {...editedTasks[j], status: newStatus}
             //---change count of task by status
             let task_count = {...editedBoards[i].tasks_count}
             task_count[itemTask.status.toLowerCase() as keyof typeof board.tasks_count] -= 1
-            task_count[task.status.toLowerCase() as keyof typeof board.tasks_count] += 1
+            task_count[newStatus.toLowerCase() as keyof typeof board.tasks_count] += 1
             editedBoards[i] = {...editedBoards[i], tasks_count: {...task_count}}
             //--------
-
-            editedTasks[j] = {...editedTasks[j], ...task}
 
             return true
           }
@@ -280,7 +256,30 @@ export const boardReducers = createReducer(
       }
       return false
     })
+    return {
+      ...state,
+      boards: editedBoards
+    }
+  }),
+  on(editTaskSuccess, (state, {boardId, task}) => {
+    let editedBoards: IBoard[] = [...state.boards];
+    editedBoards.find((board, i) => {
+      if (board._id === boardId) {
+        const editedTasks = [...board.tasks]
 
+        board.tasks.find((itemTask, j) => {
+          if (itemTask._id === task._id) {
+            editedTasks[j] = {...editedTasks[j], ...task}
+            return true
+          }
+          return false
+        })
+
+        editedBoards[i] = {...editedBoards[i], tasks: editedTasks}
+        return true
+      }
+      return false
+    })
     return {
       ...state,
       boards: editedBoards,

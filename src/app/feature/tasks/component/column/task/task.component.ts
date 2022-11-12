@@ -6,11 +6,9 @@ import {AppState} from "../../../../../state/app.state";
 import {
   archiveTaskRequest,
   deleteTaskRequest,
-  editTaskRequest,
   setTaskID
 } from "../../../../../state/task/task.actions";
 import {ModalService} from "../../../../../services/modal.service";
-import {isDeleting} from "../../../../../state/board/board.selectors";
 
 @Component({
   selector: 'app-task',
@@ -38,7 +36,7 @@ export class TaskComponent implements OnInit {
 
   dragStart(e: any) {
     this.store.dispatch(setTaskID({taskId: this.task._id}))
-    e.target.classList.add('invisible')
+    setTimeout(() =>  e.target.classList.add('invisible'), 0)
   }
 
   dragEnd(e: any) {

@@ -9,11 +9,11 @@ import {
   addTaskCommentRequest, archiveTaskRequest,
   deleteTaskCommentRequest,
   deleteTaskImgRequest, deleteTaskRequest, deleteTaskSuccess, editTaskCommentRequest,
-  editTaskRequest, editTaskSuccess
+  editTaskRequest
 } from "../../../../state/task/task.actions";
 import {userSelector} from "../../../../state/auth/auth.selectors";
 import {Subscription, take} from "rxjs";
-import {addBoardSuccess, clearError} from "../../../../state/board/board.actions";
+import {clearError} from "../../../../state/board/board.actions";
 import {IComment} from "../../../../models/IComment";
 import {ofType} from "@ngrx/effects";
 import {isArchiving, isCommentLoading, isDeleting, isLoadingBoard} from "../../../../state/board/board.selectors";

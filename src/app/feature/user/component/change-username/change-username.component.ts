@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {authErrorSelector, isUsernameLoading, usernameErrorSelector} from "../../../../state/auth/auth.selectors";
+import {isUsernameLoading, usernameErrorSelector} from "../../../../state/auth/auth.selectors";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../../state/app.state";
 import {take} from "rxjs";

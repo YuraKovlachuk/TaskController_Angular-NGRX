@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModalService} from "../../../../../services/modal.service";
-import {isArchiving, isDeleting, isLoadingBoard} from "../../../../../state/board/board.selectors";
+import {isArchiving, isDeleting} from "../../../../../state/board/board.selectors";
 import {AppState} from "../../../../../state/app.state";
 import {Store} from "@ngrx/store";
 
@@ -32,8 +31,11 @@ export class MenuComponent implements OnInit {
         let menu = event.currentTarget as HTMLDivElement;
         let parent = menu.offsetParent as HTMLDivElement;
         let scroller = parent.lastChild as HTMLDivElement;
-        (menu.querySelector('.menu') as HTMLDivElement).style.top =
-          (menu.offsetTop + parent.offsetTop - scroller.scrollTop) + "px";
+        const obj = menu.querySelector('.menu') as HTMLDivElement
+        if(obj) {
+          (menu.querySelector('.menu') as HTMLDivElement).style.top =
+            (menu.offsetTop + parent.offsetTop - scroller.scrollTop) + "px";
+        }
       });
     }
   }

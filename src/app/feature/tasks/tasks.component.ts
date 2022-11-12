@@ -3,13 +3,12 @@ import {IBoard} from "../../models/IBoard";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/app.state";
 import {boardSelectById, taskSelectById} from "../../state/board/board.selectors";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ITask} from "../../models/ITask";
 import {ModalService} from "../../services/modal.service";
 import {Title} from "@angular/platform-browser";
 import {FilterService} from "../../services/filter.service";
 import {setBoardId} from "../../state/board/board.actions";
-import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-tasks',
@@ -37,15 +36,12 @@ export class TasksComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public modalService: ModalService,
-    private titleService: Title,
-    private storageService: StorageService)
-  {
-    this.titleService.setTitle(this.board.name + ' - CTask');
-  }
+    private titleService: Title)
+  {}
 
   ngOnInit(): void {
     this.store.dispatch(setBoardId({boardId: this.board._id}))
-
+    this.titleService.setTitle(this.board?.name + ' - CTask');
   }
 
   ngOnDestroy() {
