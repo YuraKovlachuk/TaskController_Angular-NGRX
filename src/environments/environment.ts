@@ -6,8 +6,10 @@ export const environment = {
   production: false,
   // API: 'http://127.0.0.1:8080/api',
   // URL: 'http://127.0.0.1:8080/'
-  API: 'https://enigmatic-shelf-18044.herokuapp.com/api',
-  URL: 'https://enigmatic-shelf-18044.herokuapp.com/'
+  // API: 'https://enigmatic-shelf-18044.herokuapp.com/api',
+  // URL: 'https://enigmatic-shelf-18044.herokuapp.com/',
+  API: 'https://ctask-app.onrender.com/api',
+  URL: 'https://ctask-app.onrender.com/'
 };
 
 /*
